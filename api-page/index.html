@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta property="og:title" content="Ikyy Officiall">
+    <meta property="og:description" content="Ikyy Api's presents a collection of endpoints that you can use right away.">
+    <link rel="icon" href="/src/icon.jpg" type="image/png">
+    <title id="page"></title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" />
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+    <link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+    <div id="loadingScreen">
+        <div class="savant-animation">
+            <div class="savant-text">
+                <span class="letter" data-char="S">I</span>
+                <span class="letter" data-char="A">K</span>
+                <span class="letter" data-char="V">Y</span>
+                <span class="letter" data-char="A">Y</span>
+                <span class="letter" data-char="N">X</span>
+                <span class="letter" data-char="T">D</span>
+            </div>
+            <div class="background-blur"></div>
+        </div>
+    </div>
+
+    <nav class="navbar navbar-expand-lg navbar-light">
+        <div class="container">
+            <a class="navbar-brand" style="display: flex; align-items: center;">
+                <span id="header" class="me-2"></span>
+                <div id="versionHeader"></div>
+            </a>
+
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">
+                            <i class="fas fa-bars me-1"></i> Menu
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li>
+                                <a class="dropdown-item" href="https://t.me/ikyyxraz" target="_blank">
+                                    <i class="fab fa-telegram me-2"></i> Channel Telegram
+                                </a>
+                            </li>
+                            <li>
+                                <a class="dropdown-item" href="https://whatsapp.com/channel/0029Vb6mq7IAzNc0Bl1Ox51q" target="_blank">
+                                    <i class="fab fa-whatsapp me-2"></i> Channel WhatsApp
+                                </a>
+                            </li>
+                            <li>
+                                <a class="dropdown-item" href="https://github.com/ikyy-dev" target="_blank">
+                                    <i class="fab fa-github me-2"></i> Github
+                                </a>
+                            </li>
+                            <li>
+                                <a class="dropdown-item" href="https://youtube.com/@Ikyy-Crasher" target="_blank">
+                                    <i class="fab fa-youtube me-2"></i> YouTube
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container">
+        <div class="row mb-4">
+            <div class="col-12">
+                <img id="dynamicImage" class="banner mb-3" style="border-radius: 8px;" src="">
+                <div id="nameContainer" style="display: flex; align-items: center; margin-bottom: 10px;">
+                    <h1 id="name" style="font-size: 32px; margin-right: 10px;"></h1>
+                    <div id="version"></div>
+                </div>
+                <p id="description" class="lead mb-3"></p>
+                <div id="apiLinks"></div>
+            </div>
+        </div>
+
+        <div class="row mb-5">
+            <div class="col-12">
+                <div class="stats-grid">
+                    <div class="stat-item first-item">
+                        <div class="stat-number" id="totalEndpoints">0</div>
+                        <div class="stat-label">Total Endpoints</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-number" id="totalCategories">0</div>
+                        <div class="stat-label">Categories</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-number" id="totalRequests">0</div>
+                        <div class="stat-label">Total Requests</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-number" id="todayRequests">0</div>
+                        <div class="stat-label">Requests Today</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <input type="text" id="searchInput" class="form-control mb-5" placeholder="Search API...">
+
+        <div class="tab-content" id="apiContent"></div>
+    </div>
+
+    <div class="modal fade" id="apiResponseModal" tabindex="-1" aria-labelledby="apiResponseModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" id="modalDialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <div>
+                        <h5 class="modal-title" id="apiResponseModalLabel"></h5>
+                        <p class="modal-desc text-muted mb-0" id="apiResponseModalDesc" style="font-size: 14px;"></p>
+                    </div>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <pre id="apiEndpoint" style="background-color: #f8f9fa; padding: 10px; border-radius: 5px;"></pre>
+                    <div id="apiQueryInputContainer"></div>
+                    <div id="apiResponseLoading" class="d-none d-flex justify-content-center align-items-center" style="height: 100px;">
+                        <div class="spinner-border custom-spinner" role="status">
+                            <span class="visually-hidden">Loading...</span>
+                        </div>
+                    </div>
+                    <pre id="apiResponseContent" class="d-none mt-2" style="background-color: #f8f9fa; padding: 10px; border-radius: 5px;"></pre>
+                </div>
+                <div class="modal-footer">
+                    <button id="submitQueryBtn" class="btn btn-primary">Submit</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="/script.js"></script>
+</body>
+                  </html>
