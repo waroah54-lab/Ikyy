@@ -1,0 +1,261 @@
+{
+  "name": "Ikyy Api's",
+  "version": "",
+  "description": "Simple and Easy-to-Use API Documentation",
+  "header": {
+    "status": "Online!",
+    "imageSrc": [
+      "https://files.catbox.moe/bilbqj.mp4"
+    ],
+    "imageSize": {
+      "mobile": "80%",
+      "tablet": "40%",
+      "desktop": "40%"
+    }
+  },
+  "apiSettings": {
+    "creator": "Ikyy-Officiall",
+    "apikey": [
+      "kyzz",
+      "Ikyyzx"
+    ]
+  },
+  "links": [
+    {
+      "name": "Telegram",
+      "url": "https://t.me/ikyyxraz"
+    },
+    {
+      "name": "Contact Me",
+      "url": "https://t.me/IkyyExecutive"
+    }
+  ],
+  "categories": [
+    {
+      "name": "AI",
+      "items": [
+        {
+          "name": "AI 4Chat",
+          "desc": "AI 4Chat (Text Generation)",
+          "path": "/ai/ai4chat/chat?apikey=&question="
+        },
+        {
+          "name": "AI 4Chat",
+          "desc": "AI 4Chat (Generate Image)",
+          "path": "/ai/ai4chat/image?apikey=&prompt=&ratio="
+        }
+      ]
+    },
+    {
+      "name": "Ai Tools",
+      "items": [
+        {
+          "name": "AI OpenAi",
+          "desc": "Cek Error Ai",
+          "innerDesc": "Masukan Code",
+          "path": "/ai/openai?apikey=&text="
+        }
+      ]
+    },
+    {
+      "name": "Downloader",
+      "items": [
+        {
+          "name": "Instagram",
+          "desc": "Instagram video downloader",
+          "innerDesc": "Masukan link reel instagram",
+          "path": "/download/instagram?apikey=&query="
+        },
+        {
+          "name": "Spotify",
+          "desc": "Spotify downloader",
+          "innerDesc": "Masukan url",
+          "path": "/download/spotify?apikey=&url="
+        },
+        {
+          "name": "JadwalSholat",
+          "desc": "JadwalList",
+          "innerDesc": "Masukan kota",
+          "path": "/download/jadwalsholat?apikey=&kota="
+        },
+        {
+          "name": "Tiktok",
+          "desc": "TikTok video downloader",
+          "innerDesc": "Masukan link video tiktok",
+          "path": "/download/tiktok?apikey=&query="
+        },
+        {
+          "name": "Terabox",
+          "desc": "Terabox downloader",
+          "innerDesc": "Masukan link",
+          "path": "/download/terabox?apikey=&url="
+        },
+        {
+          "name": "Mediafire",
+          "desc": "Mediafire media downloader",
+          "innerDesc": "Masukan link mediafire",
+          "path": "/download/mediafire?apikey=&query="
+        }
+      ]
+    },
+    {
+      "name": "Canvas",
+      "items": [
+        {
+          "name": "Brat V1",
+          "desc": "Brat Generator",
+          "innerDesc": "Masukan teks",
+          "path": "/canvas/bratv1?apikey=&text="
+        },
+        {
+          "name": "Text2Image",
+          "desc": "Text2Image Generator",
+          "innerDesc": "Masukan nama font & teks",
+          "path": "/canvas/text2img?apikey=&font=&text="
+        },
+        {
+          "name": "Check Font",
+          "desc": "Check Font Available",
+          "innerDesc": "Ini hanya alat bantu text2image",
+          "path": "/canvant?apikey="
+        }
+      ]
+    },
+    {
+      "name": "Random",
+      "items": [
+        {
+          "name": "Blue Archive",
+          "desc": "Blue Archive Random Images",
+          "path": "/random/blue-archive?apikey="
+        },
+        {
+          "name": "Couple Profile",
+          "desc": "Profile random Images",
+          "path": "/random/ppcouple?apikey="
+        },
+        {
+          "name": "Loli",
+          "desc": "Loli Random Images",
+          "path": "/random/loli?apikey="
+        }
+      ]
+    },
+    {
+      "name": "Search",
+      "items": [
+        {
+          "name": "Search Play",
+          "desc": "Youtube music play",
+          "innerDesc": "Masukan judul lagu, bukan URL",
+          "path": "/download/play?apikey=&query="
+        },
+        {
+          "name": "Play Spotify",
+          "desc": "Spotify music play",
+          "innerDesc": "Masukan judul lagu, bukan URL",
+          "path": "/download/spotify?apikey=&query="
+        },
+        {
+          "name": "Github Search",
+          "desc": "Github repository search",
+          "innerDesc": "Masukan nama repository",
+          "path": "/search/github?apikey=&query="
+        },
+        {
+          "name": "lyrics Search",
+          "desc": "lyrics search",
+          "innerDesc": "Masukan judul lirik",
+          "path": "/search/lyrics?apikey=&query="
+        },
+        {
+          "name": "Stickerly Search",
+          "desc": "Sticker search",
+          "innerDesc": "Masukan query",
+          "path": "/search/sticker?apikey=&query="
+        },
+        {
+          "name": "SoundCloud Search",
+          "desc": "Music SoundCloud search",
+          "innerDesc": "Masukan query",
+          "path": "/search/soundcloud?apikey=&query="
+        },
+        {
+          "name": "Tiktok Search",
+          "desc": "Tiktok video search",
+          "innerDesc": "Masukan judul video",
+          "path": "/search/tiktok?apikey=&query="
+        },
+        {
+          "name": "Pinterest Search",
+          "desc": "Pinterest Photo search",
+          "innerDesc": "Masukan Prompt",
+          "path": "/search/pinterest?apikey=&query="
+        },
+        {
+          "name": "YouTube Search",
+          "desc": "Youtube video search",
+          "innerDesc": "Masukan judul video",
+          "path": "/search/youtube?apikey=&query="
+        }
+      ]
+    },
+    {
+      "name": "Info",
+      "items": [
+        {
+          "name": "Cuaca Chek",
+          "desc": "Cek Info Cuaca",
+          "innerDesc": "Masukan city",
+          "path": "/Info/cuaca?apikey=&query="
+        }
+      ]
+    },
+        {
+      "name": "Stalk",
+      "items": [
+        {
+          "name": "Github Stalk",
+          "desc": "Github users stalk",
+          "innerDesc": "Masukan username github",
+          "path": "/stalk/github?apikey=&user="
+        },
+        {
+          "name": "Tiktok Stalk",
+          "desc": "Tiktok users stalk",
+          "innerDesc": "Masukan username tiktok",
+          "path": "/stalk/tiktok?apikey=&user="
+        }
+      ]
+    },
+    {
+      "name": "Tools",
+      "items": [
+        {
+          "name": "Check Operator",
+          "desc": "Check operator by number",
+          "innerDesc": "Masukan nomor telpon",
+          "path": "/tools/operator?apikey=&phone="
+        },
+        {
+          "name": "Sticker Detail",
+          "desc": "Detail Sticker By Sticker.ly",
+          "innerDesc": "Masukan url",
+          "path": "/tools/sticker?apikey=&url="
+        },
+        {
+          "name": "Git Clone",
+          "desc": "Clone github repository",
+          "innerDesc": "Masukan link repo",
+          "path": "/tools/gitclone?apikey=&url="
+        },
+        {
+          "name": "IDR Converter",
+          "desc": "Kurs Mata Uang",
+          "innerDesc": "Masukan nomor from & to & amount",
+          "path": "/tools/kurs?apikey=&from=&to=&amount="
+        }
+      ]
+    }
+  ]
+        }
