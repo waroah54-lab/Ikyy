@@ -19,6 +19,7 @@
             background-color: #0d0d0d;
             color: #f0f0f0;
             font-family: 'Poppins', sans-serif;
+            padding-bottom: 150px; /* 🔥 biar konten GA kepotong */
         }
 
         /* NAVBAR */
@@ -51,6 +52,7 @@
             justify-content: center;
             align-items: center;
         }
+
         .savant-text {
             font-size: 50px;
             font-weight: 600;
@@ -66,6 +68,7 @@
             filter: blur(80px);
             opacity: 0.4;
         }
+
         @keyframes fadeIn {
             from { opacity: .3; }
             to { opacity: 1; }
@@ -75,6 +78,8 @@
         .banner {
             width: 100%;
             border-radius: 10px;
+            max-height: 180px;
+            object-fit: cover;
         }
 
         /* SEARCH */
@@ -134,6 +139,7 @@
             font-weight: bold;
             color: #00d2ff;
         }
+
     </style>
 </head>
 
@@ -141,12 +147,7 @@
     <div id="loadingScreen">
         <div class="savant-animation">
             <div class="savant-text">
-                <span>I</span>
-                <span>K</span>
-                <span>Y</span>
-                <span>Y</span>
-                <span>X</span>
-                <span>D</span>
+                <span>I</span><span>K</span><span>Y</span><span>Y</span><span>X</span><span>D</span>
             </div>
             <div class="background-blur"></div>
         </div>
@@ -166,7 +167,6 @@
 
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav ms-auto">
-
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown">
                             <i class="fas fa-bars me-1"></i> Menu
@@ -215,12 +215,12 @@
         </div>
 
         <input type="text" id="searchInput" class="form-control mb-5" placeholder="Search API...">
-        <div class="tab-content" id="apiContent"></div>
+        <div class="tab-content" id="apiContent" style="padding-bottom:50px;"></div>
     </div>
 
     <!-- MODAL -->
     <div class="modal fade" id="apiResponseModal" tabindex="-1">
-        <div class="modal-dialog modal-dialog-centered" id="modalDialog">
+        <div class="modal-dialog modal-dialog-centered modal-lg">
             <div class="modal-content">
 
                 <div class="modal-header">
