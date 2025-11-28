@@ -19,7 +19,7 @@
             background-color: #0d0d0d;
             color: #f0f0f0;
             font-family: 'Poppins', sans-serif;
-            padding-bottom: 150px; /* 🔥 biar konten GA kepotong */
+            padding-bottom: 150px;
         }
 
         /* NAVBAR */
@@ -29,16 +29,6 @@
         }
         .navbar a, .navbar-brand, .nav-link {
             color: #f0f0f0 !important;
-        }
-        .dropdown-menu {
-            background: #1a1a1a;
-            border: 1px solid #333;
-        }
-        .dropdown-item {
-            color: #e5e5e5;
-        }
-        .dropdown-item:hover {
-            background: #333;
         }
 
         /* LOADING SCREEN */
@@ -52,7 +42,6 @@
             justify-content: center;
             align-items: center;
         }
-
         .savant-text {
             font-size: 50px;
             font-weight: 600;
@@ -60,15 +49,6 @@
             color: white;
             animation: fadeIn 2s ease infinite alternate;
         }
-        .background-blur {
-            position: absolute;
-            width: 200px;
-            height: 200px;
-            background: #00aaff;
-            filter: blur(80px);
-            opacity: 0.4;
-        }
-
         @keyframes fadeIn {
             from { opacity: .3; }
             to { opacity: 1; }
@@ -82,22 +62,22 @@
             object-fit: cover;
         }
 
+        /* ⭐ FIX SUBTITLE TERLALU GELAP */
+        #description {
+            color: #d6d6d6 !important;
+            font-size: 15px;
+            margin-top: 5px;
+            text-shadow: 0px 0px 3px rgba(255,255,255,0.2);
+        }
+
         /* SEARCH */
         #searchInput {
             background: #111;
             border: 1px solid #333;
             color: white;
         }
-        #searchInput::placeholder {
-            color: #aaa;
-        }
 
         /* API BOXES */
-        .tab-pane {
-            background: #111;
-            padding: 20px;
-            border-radius: 10px;
-        }
         .api-item {
             background: #161616;
             padding: 12px;
@@ -105,19 +85,11 @@
             border: 1px solid #222;
             margin-bottom: 12px;
         }
-        .api-item:hover {
-            background: #1f1f1f;
-        }
 
         /* MODAL */
         .modal-content {
             background: #121212 !important;
             color: white !important;
-            border: 1px solid #333;
-        }
-        pre {
-            background: #1a1a1a !important;
-            color: #0ff !important;
             border: 1px solid #333;
         }
 
@@ -139,7 +111,6 @@
             font-weight: bold;
             color: #00d2ff;
         }
-
     </style>
 </head>
 
@@ -160,44 +131,25 @@
                 <span id="header" class="me-2"></span>
                 <div id="versionHeader"></div>
             </a>
-
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
                 <span class="navbar-toggler-icon"></span>
             </button>
-
-            <div class="collapse navbar-collapse" id="navbarNav">
-                <ul class="navbar-nav ms-auto">
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown">
-                            <i class="fas fa-bars me-1"></i> Menu
-                        </a>
-
-                        <ul class="dropdown-menu">
-                            <li><a class="dropdown-item" href="https://t.me/ikyyxraz" target="_blank"><i class="fab fa-telegram me-2"></i>Telegram</a></li>
-                            <li><a class="dropdown-item" href="https://whatsapp.com/channel/0029Vb6mq7IAzNc0Bl1Ox51q" target="_blank"><i class="fab fa-whatsapp me-2"></i>WhatsApp</a></li>
-                            <li><a class="dropdown-item" href="https://github.com/ikyy-dev" target="_blank"><i class="fab fa-github me-2"></i>Github</a></li>
-                            <li><a class="dropdown-item" href="https://youtube.com/@Ikyy-Crasher" target="_blank"><i class="fab fa-youtube me-2"></i>YouTube</a></li>
-                        </ul>
-
-                    </li>
-                </ul>
-            </div>
         </div>
     </nav>
 
     <!-- CONTENT -->
     <div class="container">
-
         <div class="row mb-4">
             <div class="col-12">
                 <img id="dynamicImage" class="banner mb-3" src="">
-
-                <div id="nameContainer" style="display: flex; align-items: center; margin-bottom: 10px;">
+                <div style="display: flex; align-items: center; margin-bottom: 10px;">
                     <h1 id="name" style="font-size: 32px; margin-right: 10px;"></h1>
                     <div id="version"></div>
                 </div>
 
+                <!-- ⭐ SUBTITLE YG SUDAH FIX TERANG -->
                 <p id="description" class="lead mb-3"></p>
+
                 <div id="apiLinks"></div>
             </div>
         </div>
@@ -222,7 +174,6 @@
     <div class="modal fade" id="apiResponseModal" tabindex="-1">
         <div class="modal-dialog modal-dialog-centered modal-lg">
             <div class="modal-content">
-
                 <div class="modal-header">
                     <div>
                         <h5 class="modal-title" id="apiResponseModalLabel"></h5>
@@ -233,19 +184,15 @@
 
                 <div class="modal-body">
                     <pre id="apiEndpoint"></pre>
-                    <div id="apiQueryInputContainer"></div>
-
                     <div id="apiResponseLoading" class="d-none d-flex justify-content-center align-items-center" style="height: 100px;">
                         <div class="spinner-border"></div>
                     </div>
-
                     <pre id="apiResponseContent" class="d-none mt-2"></pre>
                 </div>
 
                 <div class="modal-footer">
                     <button id="submitQueryBtn" class="btn btn-primary">Submit</button>
                 </div>
-
             </div>
         </div>
     </div>
