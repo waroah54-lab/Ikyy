@@ -1,281 +1,325 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta property="og:title" content="Ikyy Officiall">
-    <meta property="og:description" content="Ikyy Api's presents a collection of endpoints that you can use right away.">
-    <link rel="icon" href="/src/icon.jpg" type="image/png">
-    <title id="page"></title>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta property="og:title" content="Ikyy Officiall">
+<meta property="og:description" content="Ikyy Api's presents a collection of endpoints that you can use right away.">
+<link rel="icon" href="/src/icon.jpg" type="image/png">
+<title id="page"></title>
 
-    <!-- Bootstrap -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" />
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500&display=swap" rel="stylesheet" />
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+<!-- Bootstrap -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" />
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
 
-    <!-- NEON UI -->
-    <style>
-        body {
-            background: #0c0f1a;
-            color: #e8e8e8;
-            font-family: 'Poppins', sans-serif;
-        }
+<!-- NEON UI -->
+<style>
+body {
+    background: #0c0f1a;
+    color: #e8e8e8;
+    font-family: 'Poppins', sans-serif;
+}
 
-        .neon-glow {
-            box-shadow: 0 0 10px #00eaff55, 0 0 20px #00eaff44, 0 0 40px #00eaff22;
-            transition: 0.2s;
-        }
-        .neon-glow:hover {
-            box-shadow: 0 0 15px #00eaffaa, 0 0 30px #00eaff88, 0 0 60px #00eaff55;
-        }
+.neon-glow {
+    box-shadow: 0 0 10px #00eaff55, 0 0 20px #00eaff44, 0 0 40px #00eaff22;
+    transition: 0.2s;
+}
+.neon-glow:hover {
+    box-shadow: 0 0 15px #00eaffaa, 0 0 30px #00eaff88, 0 0 60px #00eaff55;
+}
 
-        /* NAVBAR */
-        .navbar {
-            background: rgba(15, 22, 40, 0.8) !important;
-            border-bottom: 1px solid rgba(0, 200, 255, 0.3);
-            backdrop-filter: blur(8px);
-        }
-        .navbar a, .navbar-brand, .nav-link {
-            color: #dffaff !important;
-            text-shadow: 0 0 6px #00eaffaa;
-        }
-        .dropdown-menu {
-            background: #101627;
-            border: 1px solid #00c8ff55;
-        }
-        .dropdown-item {
-            color: #dffaff;
-        }
-        .dropdown-item:hover {
-            background: #0f2333;
-        }
+/* NAVBAR */
+.navbar {
+    background: rgba(15, 22, 40, 0.8) !important;
+    border-bottom: 1px solid rgba(0, 200, 255, 0.3);
+    backdrop-filter: blur(8px);
+}
+.navbar a, .navbar-brand, .nav-link {
+    color: #dffaff !important;
+    text-shadow: 0 0 6px #00eaffaa;
+}
+.dropdown-menu {
+    background: #101627;
+    border: 1px solid #00c8ff55;
+}
+.dropdown-item {
+    color: #dffaff;
+}
+.dropdown-item:hover {
+    background: #0f2333;
+}
 
-        /* LOADING SCREEN */
-        #loadingScreen {
-            position: fixed;
-            width: 100%;
-            height: 100%;
-            background: #050812;
-            z-index: 9999;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-        }
-        .savant-text {
-            font-size: 50px;
-            font-weight: 600;
-            letter-spacing: 8px;
-            color: #6fe8ff;
-            text-shadow: 0 0 8px #00eaff, 0 0 20px #00eaff88;
-            animation: fadeIn 2s ease infinite alternate;
-        }
-        .background-blur {
-            position: absolute;
-            width: 200px;
-            height: 200px;
-            background: #00eaff;
-            filter: blur(100px);
-            opacity: 0.35;
-        }
-        @keyframes fadeIn {
-            from { opacity: .3; }
-            to { opacity: 1; }
-        }
+/* LOADING SCREEN */
+#loadingScreen {
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    background: #050812;
+    z-index: 9999;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.savant-text {
+    font-size: 50px;
+    font-weight: 600;
+    letter-spacing: 8px;
+    color: #6fe8ff;
+    text-shadow: 0 0 8px #00eaff, 0 0 20px #00eaff88;
+    animation: fadeIn 2s ease infinite alternate;
+}
+.background-blur {
+    position: absolute;
+    width: 200px;
+    height: 200px;
+    background: #00eaff;
+    filter: blur(100px);
+    opacity: 0.35;
+}
+@keyframes fadeIn {
+    from { opacity: .3; }
+    to { opacity: 1; }
+}
 
-        /* BANNER */
-        .banner {
-            width: 100%;
-            border-radius: 12px;
-            box-shadow: 0 0 10px #00eaff44;
-        }
+/* BANNER */
+.banner {
+    width: 100%;
+    border-radius: 12px;
+    box-shadow: 0 0 10px #00eaff44;
+}
 
-        /* SEARCH */
-        #searchInput {
-            background: #121a2c;
-            border: 1px solid #00d2ff55;
-            color: #e9faff;
-            box-shadow: 0 0 6px #00eaff33;
-        }
-        #searchInput::placeholder {
-            color: #7bb6c7;
-        }
+/* SEARCH */
+#searchInput {
+    background: #121a2c;
+    border: 1px solid #00d2ff55;
+    color: #e9faff;
+    box-shadow: 0 0 6px #00eaff33;
+}
+#searchInput::placeholder {
+    color: #7bb6c7;
+}
 
-        /* API CONTENT */
-        .tab-pane {
-            background: #101827;
-            padding: 20px;
-            border-radius: 12px;
-            border: 1px solid #00c8ff33;
-        }
+/* API CONTENT */
+.tab-pane {
+    background: #101827;
+    padding: 20px;
+    border-radius: 12px;
+    border: 1px solid #00c8ff33;
+}
 
-        .api-item {
-            background: #131d30;
-            border: 1px solid #00eaff33;
-            border-radius: 10px;
-            padding: 14px;
-            margin-bottom: 12px;
-            color: #d8faff;
-            transition: 0.15s;
-        }
-        .api-item:hover {
-            background: #152338;
-            border-color: #00eaff88;
-            box-shadow: 0 0 10px #00eaff55;
-        }
+.api-item {
+    background: #131d30;
+    border: 1px solid #00eaff33;
+    border-radius: 10px;
+    padding: 14px;
+    margin-bottom: 12px;
+    color: #d8faff;
+    transition: 0.15s;
+}
+.api-item:hover {
+    background: #152338;
+    border-color: #00eaff88;
+    box-shadow: 0 0 10px #00eaff55;
+}
 
-        /* MODAL */
-        .modal-content {
-            background: #112034 !important;
-            color: #d8faff !important;
-            border: 1px solid #00eaff55;
-        }
-        pre {
-            background: #0f1628 !important;
-            color: #00eaff !important;
-            border: 1px solid #00eaff33;
-            box-shadow: 0 0 6px #00eaff33 inset;
-        }
+/* MODAL */
+.modal-content {
+    background: #112034 !important;
+    color: #d8faff !important;
+    border: 1px solid #00eaff55;
+}
+pre {
+    background: #0f1628 !important;
+    color: #00eaff !important;
+    border: 1px solid #00eaff33;
+    box-shadow: 0 0 6px #00eaff33 inset;
+}
 
-        /* STATS */
-        .stats-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-            gap: 15px;
-        }
-        .stat-item {
-            background: #111b2d;
-            border: 1px solid #00eaff33;
-            border-radius: 12px;
-            padding: 20px;
-            text-align: center;
-            color: #ddfaff;
-            box-shadow: 0 0 6px #00eaff22;
-        }
-        .stat-number {
-            font-size: 30px;
-            font-weight: bold;
-            color: #44ddff;
-            text-shadow: 0 0 6px #00eaffaa;
-        }
-    </style>
+/* STATS */
+.stats-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: 15px;
+}
+.stat-item {
+    background: #111b2d;
+    border: 1px solid #00eaff33;
+    border-radius: 12px;
+    padding: 20px;
+    text-align: center;
+    color: #ddfaff;
+    box-shadow: 0 0 6px #00eaff22;
+}
+.stat-number {
+    font-size: 30px;
+    font-weight: bold;
+    color: #44ddff;
+    text-shadow: 0 0 6px #00eaffaa;
+}
+</style>
 </head>
-
 <body>
-    <div id="loadingScreen">
-        <div class="savant-animation">
-            <div class="savant-text">
-                <span>I</span>
-                <span>K</span>
-                <span>Y</span>
-                <span>Y</span>
-                <span>X</span>
-                <span>D</span>
-            </div>
-            <div class="background-blur"></div>
+<div id="loadingScreen">
+    <div class="savant-animation">
+        <div class="savant-text">
+            <span>I</span><span>K</span><span>Y</span><span>Y</span><span>X</span><span>D</span>
         </div>
+        <div class="background-blur"></div>
     </div>
+</div>
 
-    <!-- NAV -->
-    <nav class="navbar navbar-expand-lg navbar-light">
-        <div class="container">
-            <a class="navbar-brand" style="display: flex; align-items: center;">
-                <span id="header" class="me-2"></span>
-                <div id="versionHeader"></div>
-            </a>
-
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-
-            <div class="collapse navbar-collapse" id="navbarNav">
-                <ul class="navbar-nav ms-auto">
-
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown">
-                            <i class="fas fa-bars me-1"></i> Menu
-                        </a>
-
-                        <ul class="dropdown-menu">
-                            <li><a class="dropdown-item" href="https://t.me/ikyyxraz" target="_blank"><i class="fab fa-telegram me-2"></i>Telegram</a></li>
-                            <li><a class="dropdown-item" href="https://whatsapp.com/channel/0029Vb6mq7IAzNc0Bl1Ox51q" target="_blank"><i class="fab fa-whatsapp me-2"></i>WhatsApp</a></li>
-                            <li><a class="dropdown-item" href="https://github.com/ikyy-dev" target="_blank"><i class="fab fa-github me-2"></i>Github</a></li>
-                            <li><a class="dropdown-item" href="https://youtube.com/@Ikyy-Crasher" target="_blank"><i class="fab fa-youtube me-2"></i>YouTube</a></li>
-                        </ul>
-
-                    </li>
-                </ul>
-            </div>
-        </div>
-    </nav>
-
-    <!-- CONTENT -->
+<!-- NAV -->
+<nav class="navbar navbar-expand-lg navbar-light">
     <div class="container">
-
-        <div class="row mb-4">
-            <div class="col-12">
-                <img id="dynamicImage" class="banner mb-3" src="">
-
-                <div id="nameContainer" style="display: flex; align-items: center; margin-bottom: 10px;">
-                    <h1 id="name" style="font-size: 32px; margin-right: 10px;"></h1>
-                    <div id="version"></div>
-                </div>
-
-                <p id="description" class="lead mb-3"></p>
-                <div id="apiLinks"></div>
-            </div>
+        <a class="navbar-brand" style="display: flex; align-items: center;">
+            <span id="header" class="me-2"></span>
+            <div id="versionHeader"></div>
+        </a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ms-auto">
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown">
+                        <i class="fas fa-bars me-1"></i> Menu
+                    </a>
+                    <ul class="dropdown-menu" id="navLinks"></ul>
+                </li>
+            </ul>
         </div>
+    </div>
+</nav>
 
-        <!-- STATS -->
-        <div class="row mb-5">
-            <div class="col-12">
-                <div class="stats-grid">
-                    <div class="stat-item"><div class="stat-number" id="totalEndpoints">0</div><div>Total Endpoints</div></div>
-                    <div class="stat-item"><div class="stat-number" id="totalCategories">0</div><div>Categories</div></div>
-                    <div class="stat-item"><div class="stat-number" id="totalRequests">55k</div><div>Total Requests</div></div>
-                    <div class="stat-item"><div class="stat-number" id="todayRequests">55k</div><div>Requests Today</div></div>
-                </div>
+<!-- CONTENT -->
+<div class="container">
+    <div class="row mb-4">
+        <div class="col-12">
+            <img id="dynamicImage" class="banner mb-3" src="">
+            <div id="nameContainer" style="display: flex; align-items: center; margin-bottom: 10px;">
+                <h1 id="name" style="font-size: 32px; margin-right: 10px;"></h1>
+                <div id="version"></div>
             </div>
+            <p id="description" class="lead mb-3"></p>
+            <div id="apiLinks"></div>
         </div>
-
-        <input type="text" id="searchInput" class="form-control mb-5" placeholder="Search API...">
-        <div class="tab-content" id="apiContent"></div>
     </div>
 
-    <!-- MODAL -->
-    <div class="modal fade" id="apiResponseModal" tabindex="-1">
-        <div class="modal-dialog modal-dialog-centered" id="modalDialog">
-            <div class="modal-content">
-
-                <div class="modal-header">
-                    <div>
-                        <h5 class="modal-title" id="apiResponseModalLabel"></h5>
-                        <p id="apiResponseModalDesc" class="text-muted mb-0" style="font-size: 14px;"></p>
-                    </div>
-                    <button class="btn-close" data-bs-dismiss="modal"></button>
-                </div>
-
-                <div class="modal-body">
-                    <pre id="apiEndpoint"></pre>
-                    <div id="apiQueryInputContainer"></div>
-
-                    <div id="apiResponseLoading" class="d-none d-flex justify-content-center align-items-center" style="height: 100px;">
-                        <div class="spinner-border"></div>
-                    </div>
-
-                    <pre id="apiResponseContent" class="d-none mt-2"></pre>
-                </div>
-
-                <div class="modal-footer">
-                    <button id="submitQueryBtn" class="btn btn-primary">Submit</button>
-                </div>
-
+    <!-- STATS -->
+    <div class="row mb-5">
+        <div class="col-12">
+            <div class="stats-grid">
+                <div class="stat-item"><div class="stat-number" id="totalEndpoints">0</div><div>Total Endpoints</div></div>
+                <div class="stat-item"><div class="stat-number" id="totalCategories">0</div><div>Categories</div></div>
+                <div class="stat-item"><div class="stat-number" id="totalRequests">55k</div><div>Total Requests</div></div>
+                <div class="stat-item"><div class="stat-number" id="todayRequests">55k</div><div>Requests Today</div></div>
             </div>
         </div>
     </div>
 
-    <!-- JS -->
-    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="/script.js"></script>
+    <input type="text" id="searchInput" class="form-control mb-5" placeholder="Search API...">
+    <div class="tab-content" id="apiContent"></div>
+</div>
+
+<!-- MODAL -->
+<div class="modal fade" id="apiResponseModal" tabindex="-1">
+    <div class="modal-dialog modal-dialog-centered" id="modalDialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <div>
+                    <h5 class="modal-title" id="apiResponseModalLabel"></h5>
+                    <p id="apiResponseModalDesc" class="text-muted mb-0" style="font-size: 14px;"></p>
+                </div>
+                <button class="btn-close" data-bs-dismiss="modal"></button>
+            </div>
+            <div class="modal-body">
+                <pre id="apiEndpoint"></pre>
+                <div id="apiQueryInputContainer"></div>
+                <div id="apiResponseLoading" class="d-none d-flex justify-content-center align-items-center" style="height: 100px;">
+                    <div class="spinner-border"></div>
+                </div>
+                <pre id="apiResponseContent" class="d-none mt-2"></pre>
+            </div>
+            <div class="modal-footer">
+                <button id="submitQueryBtn" class="btn btn-primary">Submit</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- JS -->
+<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+
+<script>
+async function loadSettings() {
+    try {
+        const res = await fetch('/src/settings.json');
+        const settings = await res.json();
+
+        document.getElementById('page').innerText = settings.name;
+        document.getElementById('name').innerText = settings.name;
+        document.getElementById('description').innerText = settings.description;
+        document.getElementById('version').innerText = settings.version ? `v${settings.version}` : '';
+
+        // Banner
+        const imgSrc = settings.header.imageSrc[0] || '';
+        document.getElementById('dynamicImage').src = imgSrc;
+
+        // Navbar links
+        const navLinks = document.getElementById('navLinks');
+        navLinks.innerHTML = '';
+        settings.links.forEach(link => {
+            navLinks.innerHTML += `<li><a class="dropdown-item" href="${link.url}" target="_blank">${link.name}</a></li>`;
+        });
+
+        // Render API
+        const apiContent = document.getElementById('apiContent');
+        apiContent.innerHTML = '';
+
+        let totalEndpoints = 0;
+        settings.categories.forEach(cat => {
+            const tabPane = document.createElement('div');
+            tabPane.className = 'tab-pane show active mb-4';
+            tabPane.innerHTML = `<h3 style="margin-bottom:15px; color:#44ddff;">${cat.name}</h3>`;
+
+            cat.items.forEach(item => {
+                const apiBox = document.createElement('div');
+                apiBox.className = 'api-item neon-glow';
+                apiBox.innerHTML = `
+                    <div class="api-name" style="font-weight:600; font-size:16px;">${item.name}</div>
+                    <div class="api-desc" style="color:#7bdcff; font-size:14px;">${item.desc || ''}</div>
+                    ${item.innerDesc ? `<div class="api-innerdesc" style="color:#5fdcff; font-size:12px;">${item.innerDesc}</div>` : ''}
+                `;
+                tabPane.appendChild(apiBox);
+                totalEndpoints++;
+            });
+
+            apiContent.appendChild(tabPane);
+        });
+
+        document.getElementById('totalEndpoints').innerText = totalEndpoints;
+        document.getElementById('totalCategories').innerText = settings.categories.length;
+
+        // Search filter
+        const searchInput = document.getElementById('searchInput');
+        searchInput.addEventListener('input', (e) => {
+            const q = e.target.value.toLowerCase();
+            document.querySelectorAll('.api-item').forEach(item => {
+                const text = item.textContent.toLowerCase();
+                item.style.display = text.includes(q) ? '' : 'none';
+            });
+        });
+
+        document.getElementById('loadingScreen').style.display = 'none';
+
+    } catch (err) {
+        console.error('Gagal load settings.json:', err);
+    }
+}
+
+document.addEventListener('DOMContentLoaded', loadSettings);
+</script>
 </body>
 </html>
