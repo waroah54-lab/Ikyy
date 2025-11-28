@@ -64,6 +64,11 @@
           "name": "Tebak Kata",
           "desc": "games tebakkata",
           "path": "/games/tebakkata?apikey="
+        },
+        {
+          "name": "Susun Kata",
+          "desc": "games susunkata",
+          "path": "/games/susunkata?apikey="
         }
       ]
     },
