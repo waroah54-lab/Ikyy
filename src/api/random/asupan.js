@@ -4,18 +4,18 @@ module.exports = function (app) {
 
     async function asupan() {
         try {
-            const { data } = await axios.get(`https://api.deline.web.id/random/asupan`);
-
-            if (!data || !data.url) throw new Error("Invalid response format");
-
-            const response = await axios.get(data.url, { responseType: 'arraybuffer' });
+            const response = await axios.get("https://api.deline.web.id/random/asupan", {
+                responseType: "arraybuffer",
+                headers: { "User-Agent": "Mozilla/5.0" }
+            });
 
             return {
                 buffer: Buffer.from(response.data),
-                type: response.headers['content-type'] || "video/mp4"
+                type: response.headers["content-type"] || "video/mp4"
             };
 
         } catch (error) {
+            console.error("FETCH ERROR:", error.message);
             throw error;
         }
     }
@@ -37,14 +37,17 @@ module.exports = function (app) {
             const result = await asupan();
 
             res.writeHead(200, {
-                'Content-Type': result.type,
-                'Content-Length': result.buffer.length,
+                "Content-Type": result.type,
+                "Content-Length": result.buffer.length,
             });
 
             res.end(result.buffer);
 
         } catch (error) {
-            res.status(500).send(`Error: ${error.message}`);
+            res.status(500).json({
+                status: false,
+                error: error.message
+            });
         }
     });
 };
