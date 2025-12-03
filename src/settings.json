@@ -145,6 +145,11 @@
           "path": "/random/blue-archive?apikey="
         },
         {
+          "name": "Asupan Random",
+          "desc": "Asupan Random",
+          "path": "/random/asupan?apikey="
+        },
+        {
           "name": "Couple Profile",
           "desc": "Profile random Images",
           "path": "/random/ppcouple?apikey="
