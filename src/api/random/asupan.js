@@ -1,28 +1,23 @@
 const axios = require('axios');
 
 module.exports = function (app) {
-
-    async function asupan() {
+    async function randomAsupan() {
         try {
-            const response = await axios.get("https://api.deline.web.id/random/asupan", {
-                responseType: "arraybuffer",
-                headers: { "User-Agent": "Mozilla/5.0" }
+            // Ambil URL video langsung dari API
+            const { data } = await axios.get('https://api.deline.web.id/random/asupan', {
+                responseType: 'json'
             });
 
-            return {
-                buffer: Buffer.from(response.data),
-                type: response.headers["content-type"] || "video/mp4"
-            };
-
+            // Ambil video actual dari URL yang dikembalikan
+            const videoResponse = await axios.get(data.url, { responseType: 'arraybuffer' });
+            return Buffer.from(videoResponse.data);
         } catch (error) {
-            console.error("FETCH ERROR:", error.message);
             throw error;
         }
     }
 
     app.get('/random/asupan', async (req, res) => {
         const { apikey } = req.query;
-
         if (!apikey) return res.status(400).json({
             status: false,
             error: 'apikey is required'
@@ -34,20 +29,14 @@ module.exports = function (app) {
         });
 
         try {
-            const result = await asupan();
-
+            const videoBuffer = await randomAsupan();
             res.writeHead(200, {
-                "Content-Type": result.type,
-                "Content-Length": result.buffer.length,
+                'Content-Type': 'video/mp4',
+                'Content-Length': videoBuffer.length,
             });
-
-            res.end(result.buffer);
-
+            res.end(videoBuffer);
         } catch (error) {
-            res.status(500).json({
-                status: false,
-                error: error.message
-            });
+            res.status(500).send(`Error: ${error.message}`);
         }
     });
 };
