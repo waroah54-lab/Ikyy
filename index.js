@@ -171,8 +171,8 @@ app.get('/sharecode', (req, res) => {
     res.sendFile(path.join(__dirname, 'api-page', 'sharecode.html'));
 });
 
-app.get('/portfolio', (req, res) => {
-    res.sendFile(path.join(__dirname, 'api-page', 'portfolio.html'));
+app.get('/portofolio', (req, res) => {
+    res.sendFile(path.join(__dirname, 'api-page', 'portofolio.html'));
 });
 
 app.get('/codeshare/list', (req, res) => {
