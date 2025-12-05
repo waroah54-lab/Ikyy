@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<title>Ikyy Tools - Encrypt JavaScript</title>
+<style>
+    body {
+        margin: 0;
+        font-family: "Poppins", sans-serif;
+        background: #0d0f15;
+        color: white;
+        padding: 30px;
+    }
+    h1 { font-weight: 600; text-align: center; }
+    .container {
+        max-width: 800px;
+        margin: auto;
+        background: #1a1d24;
+        padding: 25px;
+        border-radius: 15px;
+        box-shadow: 0 0 20px #00000050;
+    }
+    textarea {
+        width: 100%;
+        height: 160px;
+        border-radius: 10px;
+        padding: 10px;
+        border: none;
+        outline: none;
+        background: #111319;
+        color: #dbdbdb;
+        font-family: monospace;
+    }
+    button {
+        margin-top: 15px;
+        width: 100%;
+        padding: 14px;
+        border: none;
+        border-radius: 10px;
+        background: #5865f2;
+        color: white;
+        font-size: 17px;
+        cursor: pointer;
+        font-weight: bold;
+    }
+    button:hover { background: #4752c4; }
+    pre {
+        background: #0f1117;
+        padding: 15px;
+        border-radius: 10px;
+        overflow-x: auto;
+        white-space: pre-wrap;
+        margin-top: 20px;
+    }
+    .copy-btn {
+        margin-top: 10px;
+        background: #00c983;
+    }
+</style>
+</head>
+<body>
+
+<h1>🔧 Ikyy Tools - Encrypt JavaScript</h1>
+
+<div class="container">
+    <label>Kode JavaScript:</label>
+    <textarea id="inputCode" placeholder="console.log('Ikyy Ganteng');"></textarea>
+
+    <button onclick="encryptCode()">Encrypt Sekarang</button>
+
+    <h3>Hasil Encrypt:</h3>
+    <pre id="output">Menunggu input...</pre>
+
+    <button class="copy-btn" onclick="copyResult()">Copy Hasil</button>
+</div>
+
+<script>
+function encryptCode() {
+    const text = document.getElementById("inputCode").value;
+    if (!text) return alert("Masukkan kode dulu!");
+
+    fetch(`/api/tools/encrypt?text=` + encodeURIComponent(text))
+        .then(res => res.json())
+        .then(d => {
+            if (d.status) {
+                document.getElementById("output").textContent = d.result;
+            } else {
+                document.getElementById("output").textContent = "Error: " + d.message;
+            }
+        });
+}
+
+function copyResult() {
+    const text = document.getElementById("output").textContent;
+    navigator.clipboard.writeText(text);
+    alert("Berhasil disalin!");
+}
+</script>
+
+</body>
+</html>
