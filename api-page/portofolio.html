@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ikyy Official – Portfolio</title>
+
+<style>
+    @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap');
+
+    body {
+        margin: 0;
+        font-family: "Poppins", sans-serif;
+        background: linear-gradient(145deg, #0a0a0a, #111);
+        color: #fff;
+        overflow-x: hidden;
+    }
+
+    /* Floating gradient background */
+    .gradient-bg {
+        position: fixed;
+        width: 600px;
+        height: 600px;
+        background: radial-gradient(circle at center, #4d8dff55, #0000);
+        top: -100px;
+        right: -100px;
+        filter: blur(80px);
+        z-index: -1;
+    }
+
+    .gradient-bg2 {
+        position: fixed;
+        width: 500px;
+        height: 500px;
+        background: radial-gradient(circle at center, #ff4dfd55, #0000);
+        bottom: -150px;
+        left: -100px;
+        filter: blur(80px);
+        z-index: -1;
+    }
+
+    header {
+        text-align: center;
+        padding: 65px 20px;
+    }
+
+    h1 {
+        font-size: 42px;
+        letter-spacing: 1px;
+        font-weight: 700;
+    }
+
+    p.subtitle {
+        font-size: 18px;
+        opacity: 0.8;
+        margin-top: -8px;
+    }
+
+    .container {
+        max-width: 900px;
+        margin: auto;
+        padding: 20px;
+    }
+
+    /* Glassmorphism Card */
+    .card {
+        background: rgba(255, 255, 255, 0.05);
+        backdrop-filter: blur(10px);
+        padding: 30px;
+        margin: 25px 0;
+        border-radius: 20px;
+        border: 1px solid rgba(255,255,255,0.1);
+        transition: 0.25s;
+        position: relative;
+        overflow: hidden;
+    }
+
+    .card:hover {
+        transform: translateY(-6px);
+        border-color: #4d8dff;
+        background: rgba(255, 255, 255, 0.08);
+    }
+
+    /* Animated Gradient Line */
+    .card::before {
+        content: "";
+        position: absolute;
+        height: 3px;
+        width: 70%;
+        top: 0;
+        left: 0;
+        background: linear-gradient(to right, #4d8dff, #ff4dfd);
+        opacity: 0;
+        transition: 0.3s;
+    }
+
+    .card:hover::before {
+        opacity: 1;
+        width: 100%;
+    }
+
+    h2 {
+        margin-top: 0;
+        font-size: 26px;
+    }
+
+    .btn {
+        display: inline-block;
+        padding: 12px 25px;
+        background: linear-gradient(135deg, #4d8dff, #1b6bff);
+        color: white;
+        border-radius: 12px;
+        text-decoration: none;
+        margin-top: 15px;
+        font-weight: 600;
+        transition: 0.25s;
+        box-shadow: 0 0 10px #1b6bff55;
+    }
+
+    .btn:hover {
+        transform: scale(1.07);
+        background: linear-gradient(135deg, #1b6bff, #4d8dff);
+        box-shadow: 0 0 14px #4d8dff99;
+    }
+</style>
+</head>
+
+<body>
+
+<div class="gradient-bg"></div>
+<div class="gradient-bg2"></div>
+
+<header>
+    <h1>Ikyy Officiall</h1>
+    <p class="subtitle">Developer • Bot Creator • API Engineer</p>
+</header>
+
+<div class="container">
+
+    <div class="card">
+        <h2>Tentang Saya</h2>
+        <p>Saya adalah seseorang yang fokus pada API Development, Bot WhatsApp/Telegram, Dan Mempelajari Hal Hal Lain</p>
+    </div>
+
+    <div class="card">
+        <h2>Project Saya</h2>
+        <ul>
+            <li>Bot WhatsApp Multi-Device (Baileys)</li>
+            <li>Telegram Bot (Telegraf & node-api-telegram)</li>
+            <li>API Downloader TikTok/IG/Youtube</li>
+            <li>Website Dashboard Admin Panel</li>
+        </ul>
+    </div>
+
+    <div class="card">
+        <h2>Rest API Saya</h2>
+        <p>REST API ini dibuat menggunakan Node.js, Express dan Vercel Serverless. Bisa digunakan untuk automation, downloader, dan berbagai fitur lainnya.</p>
+        
+        <a href="https://api-ikyyofficiall-latest.vercel.app/" class="btn">
+            Kunjungi REST API
+        </a>
+    </div>
+
+</div>
+
+</body>
+  </html>
