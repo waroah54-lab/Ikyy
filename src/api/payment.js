@@ -2,8 +2,8 @@ const fetch = require("node-fetch");
 
 module.exports = function(app) {
 
-    const project = "PROYEK_SLUG_LU";
-    const apiKey = "API_KEY_PAKASIR";
+    const project = "ikyy";
+    const apiKey = "HOy2rd7nMgsVTiTKFWEckNIGH4BB08b2";
 
     // CREATE PAYMENT
     app.get("/api/payment", async (req, res) => {
