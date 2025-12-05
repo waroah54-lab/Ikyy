@@ -192,6 +192,10 @@ app.get('/codeshare/raw/:file', (req, res) => {
     res.send(fs.readFileSync(dir, 'utf8'));
 });
 
+app.get('/payment', (req, res) => {
+    res.sendFile(path.join(__dirname, 'api-page', 'payment.html'));
+});
+
 
 app.get('/codeshare', (req, res) => {
     res.sendFile(path.join(__dirname, 'api-page', 'codeshare.html'));
