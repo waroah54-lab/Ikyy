@@ -5,10 +5,10 @@ module.exports = function (app) {
     // ===============================
     //  AI FIX ERROR API
     // ===============================
-    async function fixError(code) {
+    async function fixError(text) {
         try {
             const apiUrl = `https://api.deline.web.id/ai/openai?text=${encodeURIComponent(
-                code
+                text
             )}&prompt=${encodeURIComponent(
                 "benerin code dengan benar dan syntax tanpa penjelasan"
             )}`;
@@ -25,7 +25,7 @@ module.exports = function (app) {
     }
 
     app.get("/ai/fixerror", async (req, res) => {
-        const { apikey, code } = req.query;
+        const { apikey, text } = req.query;
 
         if (!apikey) return res.status(400).json({
             status: false,
@@ -37,7 +37,7 @@ module.exports = function (app) {
             error: "invalid apikey"
         });
 
-        if (!code) return res.status(400).json({
+        if (!text) return res.status(400).json({
             status: false,
             error: "code is required"
         });
