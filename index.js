@@ -167,6 +167,10 @@ app.get('/global-stats', async (req, res) => {
     }
 });
 
+app.get('/sharecode', (req, res) => {
+    res.sendFile(path.join(__dirname, 'api-page', 'sharecode.html'));
+});
+
 app.use(async (req, res, next) => {
     const skipPaths = ['/favicon.ico', '/global-stats', '/'];
     const skipPrefixes = ['/src'];
