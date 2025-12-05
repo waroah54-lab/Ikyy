@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<title>Payment Gateway</title>
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        background: #0f0f0f;
+        color: white;
+        text-align: center;
+        padding: 40px;
+    }
+
+    .container {
+        width: 380px;
+        background: #1c1c1c;
+        padding: 25px;
+        border-radius: 14px;
+        margin: auto;
+        box-shadow: 0 0 20px #0008;
+    }
+
+    .input-box {
+        margin-top: 15px;
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+    }
+
+    input {
+        padding: 12px;
+        border-radius: 8px;
+        border: none;
+        outline: none;
+        font-size: 17px;
+    }
+
+    button {
+        padding: 12px;
+        border: none;
+        border-radius: 8px;
+        margin-top: 10px;
+        background: #2ecc71;
+        font-size: 18px;
+        cursor: pointer;
+        color: #fff;
+    }
+
+    button:hover {
+        background: #27ae60;
+    }
+
+    #qris-box {
+        margin-top: 25px;
+        display: none;
+    }
+
+    #qris-img {
+        width: 260px;
+        border-radius: 10px;
+    }
+</style>
+</head>
+<body>
+
+<div class="container">
+    <h2>Payment Gateway</h2>
+    <p>Masukkan nominal pembayaran</p>
+
+    <div class="input-box">
+        <input type="number" id="amount" placeholder="Contoh: 15000">
+        <button onclick="bayar()">Bayar Sekarang</button>
+    </div>
+
+    <div id="qris-box">
+        <h3>Scan QRIS untuk membayar</h3>
+        <img id="qris-img" src="">
+        <p id="status"></p>
+    </div>
+</div>
+
+<script>
+async function bayar() {
+    const amount = document.getElementById("amount").value;
+    if (!amount) return alert("Masukkan nominal!");
+
+    document.getElementById("qris-box").style.display = "block";
+    document.getElementById("status").innerText = "Membuat transaksi...";
+
+    // ============================
+    // CALL API KAMU SENDIRI
+    // ============================
+    const api = `/api/payment?amount=${amount}`;
+
+    const req = await fetch(api);
+    const res = await req.json();
+
+    if (!res.status) {
+        document.getElementById("status").innerText = "Gagal membuat transaksi!";
+        return;
+    }
+
+    document.getElementById("qris-img").src = res.data.qr_image;
+    document.getElementById("status").innerText = "Scan QR untuk membayar";
+
+    // Auto cek status
+    autoCheck(res.data.code);
+}
+
+async function autoCheck(code) {
+    setInterval(async () => {
+        const req = await fetch(`/api/payment/status?code=${code}`);
+        const res = await req.json();
+
+        if (res.paid === true || res.status === "PAID") {
+            document.getElementById("status").innerHTML =
+                "<b style='color:#2ecc71'>Pembayaran Berhasil ✔</b>";
+        }
+    }, 3000);
+}
+</script>
+
+</body>
+</html>
