@@ -3,203 +3,173 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<meta property="og:title" content="Ikyy Officiall">
-<meta property="og:description" content="Ikyy Api's presents a collection of endpoints that you can use right away.">
-<link rel="icon" href="/src/icon.jpg" type="image/png">
-<title id="page"></title>
+<title>Ikyy Officiall API</title>
+<link rel="icon" href="/src/icon.jpg">
 
-<!-- Bootstrap & Fonts -->
+<!-- BOOTSTRAP & FONTS -->
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" />
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet" />
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet" />
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
 
 <style>
-/* === GLOBAL === */
+/* GLOBAL */
 body {
-    background: linear-gradient(180deg, #eef3f8 0%, #f4f7fa 100%);
-    color: #2a2d34;
+    background: linear-gradient(135deg, #eef5ff, #dfeaff);
     font-family: 'Poppins', sans-serif;
+    color: #1b2a4e;
+    overflow-x: hidden;
 }
 
 /* NAVBAR */
 .navbar {
-    background: #ffffff !important;
-    border-bottom: 1px solid #e6e9ef;
-    box-shadow: 0 3px 10px rgba(0,0,0,0.03);
+    background: #ffffffcc !important;
+    backdrop-filter: blur(10px);
+    box-shadow: 0 3px 15px rgba(0,0,0,0.08);
+    border-bottom: 1px solid #d6e4ff;
 }
-
-.navbar a, .navbar-brand, .nav-link {
-    color: #0077ff !important;
-    transition: 0.2s;
+.navbar-brand {
+    font-weight: 600;
+    color: #0d6efd !important;
 }
-
-.navbar a:hover {
-    color: #005dc1 !important;
+.nav-link {
+    color: #0d6efd !important;
+    font-weight: 500;
 }
-
-.navbar-toggler {
-    border-color: #0077ff;
-}
-
-/* DROPDOWN */
 .dropdown-menu {
+    border-radius: 12px;
+    border: 1px solid #d0dfff;
     background: #ffffff;
-    border: 1px solid #007bff33;
-    border-radius: 10px;
-    overflow: hidden;
-}
-
-.dropdown-item {
-    padding: 10px 15px;
+    box-shadow: 0 4px 18px rgba(0,0,0,0.08);
 }
 .dropdown-item:hover {
-    background: #e9f3ff;
+    background: #e9f1ff;
 }
 
-/* BANNER */
+/* HEADER */
 .banner {
     width: 100%;
-    border-radius: 15px;
-    box-shadow: 0 5px 20px rgba(0,123,255,0.15);
-    transition: 0.3s;
-}
-.banner:hover {
-    transform: scale(1.01);
-    box-shadow: 0 5px 30px rgba(0,123,255,0.25);
+    border-radius: 14px;
+    box-shadow: 0 8px 20px rgba(0,123,255,0.25);
 }
 
 /* MAIN TITLE */
-#nameContainer h1 {
+#name {
     font-size: 36px;
-    font-weight: 700;
-    color: #003f88;
+    font-weight: 600;
+    color: #0a3d91;
+    text-shadow: 0 2px 10px rgba(0,0,0,0.1);
 }
 
-/* === STATS === */
+/* STATS */
 .stats-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(170px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(165px, 1fr));
     gap: 18px;
 }
 
 .stat-item {
-    background: #ffffff;
-    border-radius: 14px;
-    padding: 25px;
-    text-align: center;
-    box-shadow: 0 8px 20px rgba(0,123,255,0.08);
-    border: 1px solid #d5e3ff;
-    transition: 0.25s ease;
-}
-
-.stat-item:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 12px 28px rgba(0,123,255,0.15);
-}
-
-.stat-number {
-    font-size: 32px;
-    font-weight: 700;
-    color: #007bff;
-}
-
-.stat-label {
-    font-size: 14px;
-    margin-top: 5px;
-    color: #4f5a6b;
-}
-
-/* === SEARCH BOX === */
-#searchInput {
-    background: #ffffff;
-    border: 1px solid #007bff44;
-    color: #333;
-    padding: 12px 16px;
-    border-radius: 12px;
-    font-size: 16px;
-    box-shadow: 0 4px 12px rgba(0,123,255,0.07);
+    background: white;
+    border-radius: 18px;
+    padding: 25px 10px;
+    box-shadow: 0 5px 18px rgba(0,86,255,0.15);
     transition: .2s;
 }
+.stat-item:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 22px rgba(0,86,255,0.25);
+}
+.stat-number {
+    font-size: 30px;
+    font-weight: 700;
+    color: #0d6efd;
+}
+.stat-label {
+    color: #576f90;
+    font-size: 14px;
+}
 
+/* SEARCH */
+#searchInput {
+    border-radius: 12px;
+    padding: 14px;
+    border: 1px solid #bcd1ff;
+    box-shadow: 0 4px 12px rgba(0,86,255,0.09);
+}
 #searchInput:focus {
-    border-color: #007bff;
-    box-shadow: 0 4px 18px rgba(0,123,255,0.15);
+    border-color: #0d6efd;
+    box-shadow: 0 0 0 3px rgba(13,110,253,0.25);
 }
 
-#searchInput::placeholder {
-    color: #999;
-}
-
-/* === API CARD === */
+/* API ITEM */
 .api-item {
     background: #ffffff;
-    border: 1px solid #cfe2ff;
-    border-radius: 12px;
+    border-radius: 14px;
     padding: 18px;
-    margin-bottom: 14px;
-    transition: 0.25s;
-    box-shadow: 0 5px 15px rgba(0,123,255,0.1);
+    border: 1px solid #c7d8ff;
+    margin-bottom: 15px;
+    box-shadow: 0 4px 14px rgba(0,110,255,0.12);
+    transition: .25s;
 }
 .api-item:hover {
-    background: #eaf3ff;
-    border-color: #88bfff;
     transform: translateY(-3px);
-    box-shadow: 0 10px 25px rgba(0,123,255,0.18);
+    border-color: #0d6efd;
+    background: #e9f2ff;
 }
 
 .api-name {
     font-weight: 600;
-    font-size: 17px;
-    color: #0056b3;
+    color: #0d47a1;
 }
-
 .api-desc {
     font-size: 14px;
-    color: #0069d9;
+    color: #0d6efd;
 }
-
 .api-innerdesc {
-    font-size: 13px;
-    color: #0a58ca;
+    font-size: 12px;
+    color: #003c8f;
 }
 
-/* === MODAL === */
+/* MODAL */
 .modal-content {
-    background: #ffffff !important;
     border-radius: 14px;
-    border: 1px solid #d7e3fa;
-    box-shadow: 0 5px 25px rgba(0,123,255,0.1);
+    background: white;
+    border: 1px solid #c8d7ff;
 }
-
 .modal-header {
-    border-bottom: 1px solid #e7effa;
+    background: #f0f6ff;
+    border-bottom: 1px solid #d8e4ff;
+}
+pre {
+    background: #f4f7ff;
+    border-radius: 10px;
+    padding: 12px;
+    color: #1b2a4e;
+}
+.btn-primary {
+    border-radius: 10px;
 }
 
-pre {
-    background: #f6f8fa;
-    color: #2d2d2d;
-    padding: 14px;
-    border-radius: 8px;
-    border: 1px solid #dce3ee;
-    box-shadow: inset 0 2px 5px rgba(0,0,0,0.05);
-}
 </style>
 </head>
+
 <body>
 
-<nav class="navbar navbar-expand-lg navbar-light">
+<!-- NAVBAR -->
+<nav class="navbar navbar-expand-lg">
 <div class="container">
-    <a class="navbar-brand" style="display: flex; align-items: center;">
-        <span id="header" class="me-2"></span>
-        <div id="versionHeader"></div>
+    <a class="navbar-brand">
+        <span id="header"></span>
+        <span id="versionHeader" class="ms-1"></span>
     </a>
-    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+
+    <button class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#navbarNav">
         <span class="navbar-toggler-icon"></span>
     </button>
+
     <div class="collapse navbar-collapse" id="navbarNav">
         <ul class="navbar-nav ms-auto">
             <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">
+                <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown">
                     <i class="fas fa-bars me-1"></i> Menu
                 </a>
                 <ul class="dropdown-menu" id="navLinks"></ul>
@@ -209,73 +179,85 @@ pre {
 </div>
 </nav>
 
+<!-- CONTAINER -->
 <div class="container mt-4">
-    <div class="row mb-4">
-        <div class="col-12">
-            <img id="dynamicImage" class="banner mb-3" src="">
-            <div id="nameContainer" style="display:flex; align-items:center; margin-bottom:10px;">
-                <h1 id="name" style="margin-right:10px;"></h1>
-                <div id="version"></div>
-            </div>
-            <p id="description" class="lead mb-3"></p>
+
+    <!-- BANNER -->
+    <img id="dynamicImage" class="banner mb-4" src="">
+
+    <!-- MAIN TITLE -->
+    <div class="d-flex align-items-center mb-3">
+        <h1 id="name"></h1>
+        <div id="version" class="ms-2"></div>
+    </div>
+
+    <p id="description" class="lead"></p>
+
+    <!-- STATS -->
+    <div class="stats-grid my-4">
+        <div class="stat-item">
+            <div class="stat-number" id="totalEndpoints">0</div>
+            <div class="stat-label">Total Endpoints</div>
+        </div>
+        <div class="stat-item">
+            <div class="stat-number" id="totalCategories">0</div>
+            <div class="stat-label">Categories</div>
+        </div>
+        <div class="stat-item">
+            <div class="stat-number">55k</div>
+            <div class="stat-label">Total Requests</div>
+        </div>
+        <div class="stat-item">
+            <div class="stat-number">55k</div>
+            <div class="stat-label">Requests Today</div>
         </div>
     </div>
 
-    <div class="row mb-5">
-        <div class="col-12">
-            <div class="stats-grid">
-                <div class="stat-item">
-                    <div class="stat-number" id="totalEndpoints">0</div>
-                    <div class="stat-label">Total Endpoints</div>
-                </div>
-                <div class="stat-item">
-                    <div class="stat-number" id="totalCategories">0</div>
-                    <div class="stat-label">Categories</div>
-                </div>
-                <div class="stat-item">
-                    <div class="stat-number" id="totalRequests">55k</div>
-                    <div class="stat-label">Total Requests</div>
-                </div>
-                <div class="stat-item">
-                    <div class="stat-number" id="todayRequests">55k</div>
-                    <div class="stat-label">Requests Today</div>
-                </div>
-            </div>
-        </div>
-    </div>
+    <!-- SEARCH -->
+    <input id="searchInput" class="form-control mb-4" placeholder="Search API...">
 
-    <input type="text" id="searchInput" class="form-control mb-5" placeholder="Search API...">
-    <div class="tab-content" id="apiContent"></div>
+    <!-- API CONTENT -->
+    <div id="apiContent"></div>
 </div>
 
-<!-- Modal -->
-<div class="modal fade" id="apiResponseModal" tabindex="-1">
-    <div class="modal-dialog modal-dialog-centered">
+<!-- MODAL -->
+<div class="modal fade" id="apiResponseModal">
+    <div class="modal-dialog modal-dialog-centered modal-lg">
         <div class="modal-content">
+
             <div class="modal-header">
                 <div>
                     <h5 class="modal-title" id="apiResponseModalLabel"></h5>
-                    <p id="apiResponseModalDesc" style="font-size:14px; color:#555;"></p>
+                    <p id="apiResponseModalDesc" class="small"></p>
                 </div>
-                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                <button class="btn-close" data-bs-dismiss="modal"></button>
             </div>
+
             <div class="modal-body">
+                
                 <pre id="apiEndpoint"></pre>
+
                 <div id="apiQueryInputContainer"></div>
-                <div id="apiResponseLoading" class="d-none d-flex justify-content-center align-items-center" style="height:100px;">
-                    <div class="spinner-border" role="status"></div>
+
+                <div id="apiResponseLoading" class="d-none text-center py-4">
+                    <div class="spinner-border"></div>
                 </div>
-                <pre id="apiResponseContent" class="d-none mt-2"></pre>
+
+                <pre id="apiResponseContent" class="d-none mt-3"></pre>
             </div>
+
             <div class="modal-footer">
-                <button id="submitQueryBtn" class="btn btn-primary">Submit</button>
+                <button id="submitQueryBtn" class="btn btn-primary px-4">Submit</button>
             </div>
+
         </div>
     </div>
 </div>
 
+<!-- JS -->
 <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
 <script src="/script.js"></script>
+
 </body>
 </html>
