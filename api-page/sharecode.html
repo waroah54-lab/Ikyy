@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Share Code – Ikyy API</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <style>
+      body {
+          background: #0d1117;
+          color: #fff;
+          font-family: "Poppins", sans-serif;
+      }
+      .glass {
+          background: rgba(255,255,255,0.06);
+          backdrop-filter: blur(10px);
+          border-radius: 15px;
+          padding: 20px;
+          border: 1px solid rgba(255,255,255,0.1);
+      }
+      textarea {
+          background: #161b22;
+          color: white;
+          border: 1px solid #30363d;
+          border-radius: 10px;
+      }
+      .code-box {
+          background: #161b22;
+          border-radius: 12px;
+          padding: 15px;
+          border: 1px solid #30363d;
+      }
+      a {
+          text-decoration: none;
+          color: #58a6ff;
+      }
+  </style>
+</head>
+
+<body>
+
+<div class="container py-4">
+
+    <h2 class="text-center mb-1 fw-bold">📤 Share Code</h2>
+    <p class="text-center mb-4">Upload / Share kode scraper kamu di sini.</p>
+
+    <div class="glass">
+
+        <label class="fw-semibold mb-2">Masukan Nama File</label>
+        <input id="filename" type="text" class="form-control mb-3"
+            placeholder="contoh: scraper-tiktok.js">
+
+        <label class="fw-semibold mb-2">Masukan Kode</label>
+        <textarea id="code" rows="10" class="form-control mb-3"
+            placeholder="// tempel kode kamu di sini"></textarea>
+
+        <button class="btn btn-primary w-100" onclick="uploadCode()">
+            🚀 Upload Code
+        </button>
+
+        <div id="result" class="mt-4"></div>
+
+    </div>
+
+</div>
+
+<script>
+async function uploadCode() {
+    const filename = document.getElementById("filename").value.trim();
+    const code = document.getElementById("code").value.trim();
+
+    if (!filename || !code) {
+        alert("Nama file dan kode wajib diisi!");
+        return;
+    }
+
+    const res = await fetch("/sharecode-upload", {
+        method: "POST",
+        headers: {"Content-Type": "application/json"},
+        body: JSON.stringify({ filename, code })
+    });
+
+    const out = await res.json();
+    document.getElementById("result").innerHTML =
+        `<div class="code-box mt-3">✔️ File tersimpan: <b>${out.file}</b></div>`;
+}
+</script>
+
+</body>
+</html>
