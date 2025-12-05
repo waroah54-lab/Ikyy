@@ -171,6 +171,35 @@ app.get('/sharecode', (req, res) => {
     res.sendFile(path.join(__dirname, 'api-page', 'sharecode.html'));
 });
 
+app.get('/tools', (req, res) => {
+    res.sendFile(path.join(__dirname, 'api-page', 'tools.html'));
+});
+
+app.get('/api/tools/encrypt', async (req, res) => {
+    const text = req.query.text;
+    
+    if (!text) return res.json({
+        status: false,
+        message: "Masukkan ?text=code"
+    });
+
+    try {
+        const r = await fetch(`https://api.deline.web.id/tools/enc?text=${encodeURIComponent(text)}`);
+        const d = await r.json();
+
+        res.json({
+            status: true,
+            result: d.result
+        });
+
+    } catch (e) {
+        res.json({
+            status: false,
+            error: e.message
+        });
+    }
+});
+
 app.get('/portofolio', (req, res) => {
     res.sendFile(path.join(__dirname, 'api-page', 'portofolio.html'));
 });
