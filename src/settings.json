@@ -50,10 +50,16 @@
       "name": "Ai Tools",
       "items": [
         {
-          "name": "AI OpenAi",
-          "desc": "Cek Error Ai",
+          "name": "AI OpenAI",
+          "desc": "Cek Error AI",
           "innerDesc": "Masukan Code",
           "path": "/ai/openai?apikey=&text="
+        },
+        {
+          "name": "AI FixError",
+          "desc": "Cek Error Code",
+          "innerDesc": "Masukan Code",
+          "path": "/ai/fixerror?apikey=&text="
         }
       ]
     },
