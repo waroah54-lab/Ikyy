@@ -171,8 +171,8 @@ app.get('/sharecode', (req, res) => {
     res.sendFile(path.join(__dirname, 'api-page', 'sharecode.html'));
 });
 
-app.get('/tools', (req, res) => {
-    res.sendFile(path.join(__dirname, 'api-page', 'tools.html'));
+app.get('/tools-encrypt', (req, res) => {
+    res.sendFile(path.join(__dirname, 'api-page', 'tools-encrypt.html'));
 });
 
 app.get('/api/tools/encrypt', async (req, res) => {
