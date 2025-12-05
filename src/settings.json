@@ -282,6 +282,12 @@
           "path": "/tools/gitclone?apikey=&url="
         },
         {
+          "name": "Encrypt JavaScript",
+          "desc": "Encrypt Code",
+          "innerDesc": "Masukan code JavaScript",
+          "path": "/tools/encrypt?apikey=&text="
+        },
+        {
           "name": "IDR Converter",
           "desc": "Kurs Mata Uang",
           "innerDesc": "Masukan nomor from & to & amount",
