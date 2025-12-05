@@ -171,6 +171,10 @@ app.get('/sharecode', (req, res) => {
     res.sendFile(path.join(__dirname, 'api-page', 'sharecode.html'));
 });
 
+app.get('/portfolio', (req, res) => {
+    res.sendFile(path.join(__dirname, 'api-page', 'portfolio.html'));
+});
+
 app.get('/codeshare/list', (req, res) => {
     const dir = path.join(__dirname, "src", "sharecode");
     if (!fs.existsSync(dir)) return res.json([]);
