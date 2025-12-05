@@ -43,7 +43,7 @@ module.exports = function (app) {
         });
 
         try {
-            const result = await fixError(code);
+            const result = await fixError(text);
 
             res.status(200).json({
                 status: true,
