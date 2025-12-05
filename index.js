@@ -171,6 +171,22 @@ app.get('/sharecode', (req, res) => {
     res.sendFile(path.join(__dirname, 'api-page', 'sharecode.html'));
 });
 
+app.post('/sharecode-upload', (req, res) => {
+    const { filename, code } = req.body;
+
+    if (!filename || !code) {
+        return res.status(400).json({ status: false, message: "Isi tidak lengkap" });
+    }
+
+    const savePath = path.join(__dirname, "src", "sharecode");
+
+    if (!fs.existsSync(savePath)) fs.mkdirSync(savePath, { recursive: true });
+
+    fs.writeFileSync(path.join(savePath, filename), code);
+
+    res.json({ status: true, file: filename });
+});
+
 app.use(async (req, res, next) => {
     const skipPaths = ['/favicon.ico', '/global-stats', '/'];
     const skipPrefixes = ['/src'];
