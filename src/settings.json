@@ -174,7 +174,7 @@
           "name": "Apple Music",
           "desc": "Play Apple Music",
           "innerDesc": "Masukan judul lagu",
-          "path": "/download/applemusic?apikey=&query="
+          "path": "/search/applemusic?apikey=&query="
         },
         {
           "name": "Play Spotify",
