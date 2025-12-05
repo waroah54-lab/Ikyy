@@ -171,6 +171,32 @@ app.get('/sharecode', (req, res) => {
     res.sendFile(path.join(__dirname, 'api-page', 'sharecode.html'));
 });
 
+app.get('/codeshare/list', (req, res) => {
+    const dir = path.join(__dirname, "src", "sharecode");
+    if (!fs.existsSync(dir)) return res.json([]);
+
+    const files = fs.readdirSync(dir).map(f => ({
+        filename: f,
+        url: `/codeshare/raw/${f}`
+    }));
+
+    res.json(files);
+});
+
+app.get('/codeshare/raw/:file', (req, res) => {
+    const dir = path.join(__dirname, "src", "sharecode", req.params.file);
+
+    if (!fs.existsSync(dir)) return res.status(404).send('File not found');
+
+    res.setHeader("Content-Type", "text/plain");
+    res.send(fs.readFileSync(dir, 'utf8'));
+});
+
+
+app.get('/codeshare', (req, res) => {
+    res.sendFile(path.join(__dirname, 'api-page', 'codeshare.html'));
+});
+
 app.post('/sharecode-upload', (req, res) => {
     const { filename, code } = req.body;
 
