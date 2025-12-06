@@ -118,6 +118,12 @@
           "path": "/download/terabox?apikey=&url="
         },
         {
+          "name": "SoundCloud",
+          "desc": "downloader SoundCloud audio",
+          "innerDesc": "Masukan link url",
+          "path": "/download/soundclouddl?apikey=&url="
+        },
+        {
           "name": "Mediafire",
           "desc": "Mediafire media downloader",
           "innerDesc": "Masukan link mediafire",
