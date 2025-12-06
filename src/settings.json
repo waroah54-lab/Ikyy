@@ -276,6 +276,12 @@
           "path": "/tools/operator?apikey=&phone="
         },
         {
+          "name": "Check Imei",
+          "desc": "Imei Phone Chek",
+          "innerDesc": "Masukan imei",
+          "path": "/tools/imei?apikey=&imei="
+        },
+        {
           "name": "Sticker Detail",
           "desc": "Detail Sticker By Sticker.ly",
           "innerDesc": "Masukan url",
