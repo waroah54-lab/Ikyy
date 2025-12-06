@@ -288,6 +288,12 @@
           "path": "/tools/encrypt?apikey=&text="
         },
         {
+          "name": "Image To Ascii",
+          "desc": "Convert Image To Ascii",
+          "innerDesc": "Masukan link.jpg",
+          "path": "/tools/ascii?apikey=&url="
+        },
+        {
           "name": "IDR Converter",
           "desc": "Kurs Mata Uang",
           "innerDesc": "Masukan nomor from & to & amount",
