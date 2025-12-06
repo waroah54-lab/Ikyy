@@ -94,6 +94,12 @@
           "path": "/download/spotify?apikey=&url="
         },
         {
+          "name": "Videy",
+          "desc": "Videy video downloader",
+          "innerDesc": "Masukan url",
+          "path": "/download/videy?apikey=&url="
+        },
+        {
           "name": "JadwalSholat",
           "desc": "JadwalList",
           "innerDesc": "Masukan kota",
