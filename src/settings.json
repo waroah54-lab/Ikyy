@@ -282,6 +282,12 @@
           "path": "/tools/operator?apikey=&phone="
         },
         {
+          "name": "Check Kuota",
+          "desc": "Khusus Axis & XL",
+          "innerDesc": "Masukan nomor telpon",
+          "path": "/tools/operator?apikey=&number="
+        },
+        {
           "name": "Check Imei",
           "desc": "Imei Phone Chek",
           "innerDesc": "Masukan imei",
