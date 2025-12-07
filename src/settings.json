@@ -91,7 +91,7 @@
           "name": "Spotify",
           "desc": "Spotify downloader",
           "innerDesc": "Masukan url",
-          "path": "/download/spotify?apikey=&url="
+          "path": "/download/spotifydl?apikey=&url="
         },
         {
           "name": "Videy",
