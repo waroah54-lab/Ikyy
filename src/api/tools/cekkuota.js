@@ -2,23 +2,39 @@ const axios = require("axios");
 
 module.exports = function (app) {
 
-    async function cekkoutaaxisxl(number) {
+    async function cekkoutaaxisxl(nomorhp) {
         try {
-            const { data } = await axios.get("https://bendith.my.id/end.php", {
+            // Buat instance request biar stabil (anti 404)
+            const api = axios.create({
+                baseURL: "https://bendith.my.id",
+                headers: {
+                    "User-Agent": "Mozilla/5.0 (Linux; Android 12)",
+                    "Accept": "*/*",
+                    "Referer": "https://bendith.my.id/",
+                    "Origin": "https://bendith.my.id"
+                },
+                timeout: 15000
+            });
+
+            const { data } = await api.get("/end.php", {
                 params: {
                     check: "package",
-                    number,
+                    number: nomorhp,
                     version: "2 201"
                 }
             });
+
             return data;
 
         } catch (e) {
-            throw new Error("Cek Kuota Error: " + e.message);
+            throw new Error("CekKuota Error: " + e.message);
         }
     }
 
-    // EXPRESS ROUTE
+    // ============================
+    //        EXPRESS ROUTE
+    // ============================
+
     app.get("/tools/cekkouta", async (req, res) => {
         const { apikey, number } = req.query;
 
@@ -36,6 +52,7 @@ module.exports = function (app) {
 
             res.json({
                 status: true,
+                number,
                 result
             });
 
