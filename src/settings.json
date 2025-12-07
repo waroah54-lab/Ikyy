@@ -285,7 +285,7 @@
           "name": "Check Kuota",
           "desc": "Khusus Axis & XL",
           "innerDesc": "Masukan nomor telpon",
-          "path": "/tools/operator?apikey=&number="
+          "path": "/tools/cekkuota?apikey=&number="
         },
         {
           "name": "Check Imei",
