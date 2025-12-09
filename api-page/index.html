@@ -7,146 +7,145 @@
 <link rel="icon" href="/src/icon.jpg">
 
 <!-- BOOTSTRAP & FONTS -->
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" />
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" />
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
 
 <style>
 /* GLOBAL */
 body {
-    background: #f6f9ff;
-    font-family: 'Poppins', sans-serif;
-    color: #1d2d50;
+    background: #f3f6fa;
+    font-family: 'Inter', sans-serif;
+    color: #1b2c48;
     overflow-x: hidden;
 }
 
 /* NAVBAR */
 .navbar {
     background: #ffffff !important;
-    border-bottom: 1px solid #e3e9ff;
-    box-shadow: 0 2px 15px rgba(0,0,0,0.06);
+    padding: 14px 0;
+    box-shadow: 0 3px 14px rgba(0,0,0,0.06);
+    border-bottom: 1px solid #e1e7ef;
 }
 .navbar-brand {
-    font-weight: 600;
-    color: #0d6efd !important;
+    font-size: 20px;
+    font-weight: 700;
+    color: #1a73e8 !important;
 }
 .nav-link {
-    color: #0d6efd !important;
+    color: #3d4f6e !important;
     font-weight: 500;
 }
 .dropdown-menu {
-    border-radius: 12px;
-    border: 1px solid #dce7ff;
-    background: #ffffff;
-    box-shadow: 0 4px 18px rgba(0,0,0,0.06);
-}
-.dropdown-item:hover {
-    background: #eef4ff;
+    border-radius: 14px;
+    border: 1px solid #d7e2f0;
 }
 
-/* HEADER / BANNER */
+/* BANNER */
 .banner {
     width: 100%;
-    border-radius: 14px;
-    box-shadow: 0 6px 16px rgba(13,110,253,0.18);
+    border-radius: 20px;
+    box-shadow: 0 8px 24px rgba(26,115,232,0.18);
 }
 
 /* MAIN TITLE */
 #name {
-    font-size: 36px;
+    font-size: 38px;
     font-weight: 700;
-    color: #0a3d91;
+    color: #12284a;
 }
 
-/* STATS */
+/* NEW STATS */
 .stats-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(170px, 1fr));
-    gap: 18px;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 22px;
 }
 
 .stat-item {
-    background: #ffffff;
+    padding: 28px 20px;
     border-radius: 16px;
-    padding: 24px 12px;
-    box-shadow: 0 4px 14px rgba(0,110,255,0.12);
-    border: 1px solid #d5e2ff;
-    transition: .2s ease;
+    background: #ffffff;
+    border: 1px solid #dfe7f2;
+    box-shadow: 0 6px 16px rgba(0,0,0,0.05);
+    transition: 0.25s ease;
 }
 .stat-item:hover {
-    transform: translateY(-3px);
-    box-shadow: 0 8px 20px rgba(0,110,255,0.18);
+    transform: translateY(-4px);
+    box-shadow: 0 10px 24px rgba(26,115,232,0.15);
 }
 .stat-number {
-    font-size: 30px;
+    font-size: 34px;
     font-weight: 700;
-    color: #0d6efd;
+    color: #1a73e8;
 }
 .stat-label {
-    color: #6781b3;
+    color: #637598;
     font-size: 14px;
+    margin-top: 4px;
 }
 
 /* SEARCH */
 #searchInput {
-    border-radius: 12px;
-    padding: 14px;
-    border: 1px solid #c8d8ff;
-    box-shadow: 0 4px 12px rgba(0,86,255,0.08);
-}
-#searchInput:focus {
-    border-color: #0d6efd;
-    box-shadow: 0 0 0 3px rgba(13,110,253,0.22);
+    border-radius: 14px;
+    padding: 15px;
+    border: 1px solid #c7d5ea;
+    background: #ffffff;
+    box-shadow: 0 4px 14px rgba(26,115,232,0.08);
 }
 
-/* API ITEM */
+/* API LIST */
 .api-item {
     background: #ffffff;
-    border-radius: 14px;
-    padding: 18px;
-    border: 1px solid #cddcff;
-    margin-bottom: 15px;
-    box-shadow: 0 4px 12px rgba(0,110,255,0.1);
-    transition: .25s;
+    padding: 20px;
+    border-radius: 16px;
+    border: 1px solid #d6e2f3;
+    margin-bottom: 18px;
+    box-shadow: 0 5px 10px rgba(0,0,0,0.04);
+    transition: .25s ease;
 }
 .api-item:hover {
+    background: #f6faff;
     transform: translateY(-3px);
-    border-color: #0d6efd;
-    background: #f1f6ff;
+    border-color: #1a73e8;
 }
 
 .api-name {
+    font-size: 18px;
     font-weight: 600;
-    color: #0d47a1;
+    color: #113a76;
 }
 .api-desc {
     font-size: 14px;
-    color: #0d6efd;
+    color: #1a73e8;
 }
 .api-innerdesc {
     font-size: 12px;
-    color: #003c8f;
+    color: #56729c;
 }
 
 /* MODAL */
 .modal-content {
-    border-radius: 14px;
     background: #ffffff;
-    border: 1px solid #d2defd;
+    border-radius: 18px;
+    border: 1px solid #d5e1f0;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.15);
 }
 .modal-header {
-    background: #f3f7ff;
-    border-bottom: 1px solid #dce6ff;
+    background: #f0f4ff;
+    border-bottom: 1px solid #d5e1f0;
 }
 pre {
-    background: #f5f7ff;
-    border-radius: 10px;
-    padding: 12px;
-    color: #1b2a4e;
+    background: #f5f8ff;
+    border-radius: 12px;
+    padding: 14px;
+    color: #1b2c48;
+    border: 1px solid #dce6f8;
 }
 .btn-primary {
-    border-radius: 10px;
+    border-radius: 12px;
 }
+
 </style>
 </head>
 
@@ -254,7 +253,7 @@ pre {
 
 <!-- JS -->
 <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 <script src="/script.js"></script>
 
 </body>
