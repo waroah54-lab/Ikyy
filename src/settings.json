@@ -112,6 +112,18 @@
           "path": "/download/tiktok?apikey=&query="
         },
         {
+          "name": "Ytmp3",
+          "desc": "downloader YouTube mp3",
+          "innerDesc": "Masukan link url",
+          "path": "/download/ytmp3?apikey=&url="
+        },
+        {
+          "name": "Ytmp4",
+          "desc": "downloader YouTube mp4",
+          "innerDesc": "Masukan link url",
+          "path": "/download/ytmp4?apikey=&url="
+        },
+        {
           "name": "Terabox",
           "desc": "Terabox downloader",
           "innerDesc": "Masukan link",
