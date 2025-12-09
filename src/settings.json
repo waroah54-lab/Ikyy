@@ -84,7 +84,7 @@
         {
           "name": "Top4Top",
           "desc": "Upload To Url",
-          "path": "/uploader/top4top?apikey=&url="
+          "path": "/uploader/top4top?apikey="
         }
       ]
     },
