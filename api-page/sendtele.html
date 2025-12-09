@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Send Telegram Message</title>
+
+    <style>
+        body {
+            margin: 0;
+            font-family: "Poppins", sans-serif;
+            background: #0f0f0f;
+            color: #ffffff;
+            display: flex;
+            justify-content: center;
+            padding: 40px;
+        }
+
+        .container {
+            width: 430px;
+            background: #181818;
+            padding: 25px;
+            border-radius: 16px;
+            box-shadow: 0 0 15px rgba(0, 255, 200, 0.2);
+            border: 1px solid #2b2b2b;
+        }
+
+        h2 {
+            text-align: center;
+            color: #00eaff;
+            margin-bottom: 20px;
+        }
+
+        label {
+            font-size: 14px;
+            font-weight: 600;
+            color: #dddddd;
+        }
+
+        input, select, textarea {
+            width: 100%;
+            padding: 10px;
+            margin-top: 4px;
+            margin-bottom: 15px;
+            border-radius: 8px;
+            border: none;
+            outline: none;
+            font-size: 14px;
+            background: #1f1f1f;
+            color: white;
+            border: 1px solid #333;
+        }
+
+        button {
+            width: 100%;
+            padding: 12px;
+            border-radius: 10px;
+            border: none;
+            font-size: 16px;
+            font-weight: bold;
+            background: linear-gradient(45deg, #00eaff, #00ffa6);
+            cursor: pointer;
+            transition: .2s;
+        }
+
+        button:hover {
+            transform: scale(1.02);
+            opacity: .9;
+        }
+
+        #console {
+            margin-top: 20px;
+            background: #111;
+            padding: 15px;
+            border-radius: 10px;
+            border: 1px solid #333;
+            height: 150px;
+            overflow-y: auto;
+            font-family: monospace;
+            font-size: 13px;
+            color: #00ffa6;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h2>Telegram Sender</h2>
+
+    <label>Bot Token</label>
+    <input type="text" id="token" placeholder="Masukkan token bot">
+
+    <label>Chat ID / Username</label>
+    <input type="text" id="chat_id" placeholder="ex: 812345678 / @username">
+
+    <label>Type Pesan</label>
+    <select id="type">
+        <option value="text">TEXT</option>
+        <option value="photo">PHOTO + CAPTION</option>
+        <option value="video">VIDEO + CAPTION</option>
+    </select>
+
+    <label>Text / Caption</label>
+    <textarea id="text" rows="3" placeholder="Isi pesan..."></textarea>
+
+    <label>File URL (opsional)</label>
+    <input type="text" id="file_url" placeholder="URL gambar/video">
+
+    <button onclick="send()">Kirim Sekarang</button>
+
+    <div id="console"></div>
+</div>
+
+
+<script>
+    function log(msg) {
+        const consoleBox = document.getElementById("console");
+        consoleBox.innerHTML += msg + "<br>";
+        consoleBox.scrollTop = consoleBox.scrollHeight;
+    }
+
+    async function send() {
+        const token = document.getElementById("token").value;
+        const chat_id = document.getElementById("chat_id").value;
+        const type = document.getElementById("type").value;
+        const text = document.getElementById("text").value;
+        const file_url = document.getElementById("file_url").value;
+
+        log("⏳ Sending request...");
+
+        const res = await fetch("/telegram/send", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ token, chat_id, type, text, file_url })
+        });
+
+        const data = await res.json();
+
+        log("✔ Response:");
+        log(JSON.stringify(data, null, 2));
+    }
+</script>
+
+</body>
+</html>
