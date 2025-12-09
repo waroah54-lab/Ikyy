@@ -174,6 +174,9 @@ app.get('/sharecode', (req, res) => {
 app.get('/tools-encrypt', (req, res) => {
     res.sendFile(path.join(__dirname, 'api-page', 'tools-encrypt.html'));
 });
+app.get('/sendtele', (req, res) => {
+    res.sendFile(path.join(__dirname, 'api-page', 'sendtele.html'));
+});
 
 app.get('/api/tools/encrypt', async (req, res) => {
     const text = req.query.text;
