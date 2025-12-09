@@ -1,11 +1,12 @@
 const axios = require("axios");
 const FormData = require("form-data");
+const multer = require("multer");
 
 module.exports = function (app) {
 
-    // =========================
-    //  SCRAPER TOKEN + ID
-    // =========================
+    // === multer untuk nerima file dari user ===
+    const upload = multer({ storage: multer.memoryStorage() });
+
     async function getTop4TopToken() {
         const html = await axios.get("https://top4top.me/en/");
         const data = html.data;
@@ -13,29 +14,19 @@ module.exports = function (app) {
         const token = data.match(/name="token" value="(.*?)"/)?.[1];
         const id = data.match(/name="id" value="(.*?)"/)?.[1];
 
-        if (!token || !id) throw new Error("Gagal mengambil token top4top");
+        if (!token || !id) throw new Error("Gagal ambil token top4top");
 
         return { token, id };
     }
 
-    // =========================
-    //  UPLOAD PROCESS
-    // =========================
-    async function uploadTop4Top(fileUrl) {
+    async function uploadTop4Top(buffer, originalName) {
         const { token, id } = await getTop4TopToken();
-
-        // Download file dulu
-        const file = await axios.get(fileUrl, {
-            responseType: "arraybuffer"
-        });
-
-        const filename = "upload_" + Date.now();
 
         const form = new FormData();
         form.append("token", token);
         form.append("id", id);
         form.append("method", "upload");
-        form.append("file", file.data, filename);
+        form.append("file", buffer, originalName);
 
         const upload = await axios.post("https://top4top.me/upload", form, {
             headers: form.getHeaders()
@@ -48,11 +39,11 @@ module.exports = function (app) {
         return upload.data.url;
     }
 
-    // =========================
-    //  ROUTER /upload/top4top
-    // =========================
-    app.get("/upload/top4top", async (req, res) => {
-        const { apikey, url } = req.query;
+    // ============================
+    // ROUTE: POST /upload/top4top
+    // ============================
+    app.post("/upload/top4top", upload.single("file"), async (req, res) => {
+        const { apikey } = req.query;
 
         if (!apikey)
             return res.status(400).json({ status: false, error: "apikey is required" });
@@ -60,11 +51,11 @@ module.exports = function (app) {
         if (!global.apikey.includes(apikey))
             return res.status(403).json({ status: false, error: "invalid apikey" });
 
-        if (!url)
-            return res.status(400).json({ status: false, error: "url is required" });
+        if (!req.file)
+            return res.status(400).json({ status: false, error: "file is required" });
 
         try {
-            const result = await uploadTop4Top(url);
+            const result = await uploadTop4Top(req.file.buffer, req.file.originalname);
 
             res.json({
                 status: true,
