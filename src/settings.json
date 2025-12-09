@@ -78,6 +78,16 @@
         }
       ]
     },
+        {
+      "name": "Uploader",
+      "items": [
+        {
+          "name": "Top4Top",
+          "desc": "Upload To Url",
+          "path": "/uploader/top4top?apikey=&url="
+        }
+      ]
+    },
     {
       "name": "Downloader",
       "items": [
