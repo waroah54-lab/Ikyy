@@ -197,6 +197,16 @@
       ]
     },
     {
+  "name": "Upload",
+  "items": [
+    {
+      "name": "Upload File",
+      "desc": "Upload file",
+      "path": "/upload"
+    }
+  ]
+    },
+    {
       "name": "Search",
       "items": [
         {
