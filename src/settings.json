@@ -111,11 +111,6 @@
           "path": "/download/jadwalsholat?apikey=&kota="
         },
         {
-          "name": "Tiktok V2",
-          "desc": "Downloader tiktok v2",
-          "path": "/download/tiktokv2?url="
-        },
-        {
           "name": "Tiktok",
           "desc": "TikTok video downloader",
           "innerDesc": "Masukan link video tiktok",
