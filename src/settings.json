@@ -88,7 +88,7 @@
           "path": "/download/instagram?apikey=&query="
         },
         {
-          "name": "Aio",
+          "name": "AIO",
           "desc": "All in downloader",
           "path": "/download/aio?url="
         },
