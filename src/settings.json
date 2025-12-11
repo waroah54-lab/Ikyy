@@ -273,7 +273,7 @@
           "name": "Pinterest Search",
           "desc": "Pinterest Photo search",
           "innerDesc": "Masukan Prompt",
-          "path": "/search/pinterest?apikey=&query="
+          "path": "/search/pinterest?apikey=&q="
         },
         {
           "name": "YouTube Search",
