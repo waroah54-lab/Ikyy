@@ -88,6 +88,11 @@
           "path": "/download/instagram?apikey=&query="
         },
         {
+          "name": "Aio",
+          "desc": "All in downloader",
+          "path": "/download/aio?url="
+        },
+        {
           "name": "Spotify",
           "desc": "Spotify downloader",
           "innerDesc": "Masukan url",
