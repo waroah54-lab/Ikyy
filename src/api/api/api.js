@@ -1,4 +1,4 @@
-/*module.exports = function (app) {
+module.exports = function (app) {
 
 function listRoutes() {
     let anuan = app._router.stack
@@ -27,4 +27,3 @@ app.get('/api/status', async (req, res) => {
         }
 });
 }
-*/
