@@ -350,4 +350,16 @@
       ]
     }
   ]
-        }
+  },
+    {
+      "name": "API",
+      "items": [
+        {
+          "name": "Status Api",
+          "desc": "",
+          "path": "/api/status"
+        }                        
+      ]
+    }               
+  ]
+}
