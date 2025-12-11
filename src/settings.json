@@ -279,7 +279,7 @@
         }
       ]
     },
-        {
+    {
       "name": "Stalk",
       "items": [
         {
@@ -348,9 +348,7 @@
           "path": "/tools/kurs?apikey=&from=&to=&amount="
         }
       ]
-    }
-  ]
-  },
+    },
     {
       "name": "API",
       "items": [
@@ -358,8 +356,8 @@
           "name": "Status Api",
           "desc": "",
           "path": "/api/status"
-        }                        
+        }
       ]
-    }               
+    }
   ]
 }
