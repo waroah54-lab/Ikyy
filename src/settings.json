@@ -237,6 +237,12 @@
           "path": "/search/soundcloud?apikey=&query="
         },
         {
+          "name": "Google search",
+          "desc": "Search Google",
+          "innerDesc": "Masukan query",
+          "path": "/search/google?apikey=&query="
+        },
+        {
           "name": "Tiktok Search",
           "desc": "Tiktok video search",
           "innerDesc": "Masukan judul video",
