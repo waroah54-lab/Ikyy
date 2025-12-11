@@ -94,4 +94,7 @@ module.exports = function (app) {
       status: true,
       creator: "Ikyy-Official",
       result: data
-    }
+    });
+  });
+
+};
