@@ -336,6 +336,11 @@
           "path": "/tools/encrypt?apikey=&text="
         },
         {
+          "name": "Screenshot Web",
+          "desc": "Screenshot web url",
+          "path": "/tools/ssweb?url="
+        }, 
+        {
           "name": "Image To Ascii",
           "desc": "Convert Image To Ascii",
           "innerDesc": "Masukan link.jpg",
