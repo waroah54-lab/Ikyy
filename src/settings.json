@@ -197,12 +197,12 @@
       ]
     },
     {
-  "name": "Upload",
+  "name": "Editor",
   "items": [
     {
-      "name": "Upload File",
-      "desc": "Upload file",
-      "path": "/upload"
+      "name": "ToFigure",
+      "desc": "Mengubah gambar menjadi figure",
+      "path": "/edit/tofigure?apikey=&image="
     }
   ]
     },
