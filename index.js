@@ -4,33 +4,41 @@ const fs = require('fs');
 const cors = require('cors');
 const path = require('path');
 const fetch = require('node-fetch');
+const axios = require('axios');
 
 const app = express();
-const PORT = process.env.SERVER_PORT;
+const PORT = process.env.SERVER_PORT || 3000;
 
-const GITHUB_TOKEN = '';
-const GITHUB_OWNER = 'waroah54-lab';
-const GITHUB_REPO = 'Ikyy';
-const REQUEST_FILE = 'filex.json';
-/*const telegramLogger = require('./telegramLogger');
+// === Telegram Config ===
 const TELEGRAM_BOT_TOKEN = '8594290972:AAEHwe3w4bsBxOyct1B_FXRxNDNBy-Y2yGI';
 const TELEGRAM_CHAT_ID = '-1002966989270';
 
-telegramLogger(app, TELEGRAM_BOT_TOKEN, TELEGRAM_CHAT_ID);*/
+async function sendTelegramError(text) {
+    try {
+        await axios.post(`https://api.telegram.org/bot${TELEGRAM_BOT_TOKEN}/sendMessage`, {
+            chat_id: TELEGRAM_CHAT_ID,
+            text
+        });
+    } catch (err) {
+        console.error('Gagal kirim notif Telegram:', err.message);
+    }
+}
 
-app.set("trust proxy");
+// === Express Setup ===
+app.set("trust proxy", true);
 app.set("json spaces", 2);
-
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cors());
 
-app.use('/', express.static(path.join(__dirname, 'api-page')));
+// Static files
 app.use('/src', express.static(path.join(__dirname, 'src')));
+app.use('/', express.static(path.join(__dirname, 'api-page')));
 
+// Load settings & global apikey
 const settingsPath = path.join(__dirname, './src/settings.json');
 const settings = JSON.parse(fs.readFileSync(settingsPath, 'utf-8'));
-global.apikey = settings.apiSettings.apikey;
+global.apikey = settings.apiSettings.apikey || [];
 
 const prefixes = new Set();
 settings.categories.forEach(category => {
@@ -39,6 +47,12 @@ settings.categories.forEach(category => {
         prefixes.add(base);
     });
 });
+
+// === GitHub Helper Functions ===
+const GITHUB_TOKEN = '';
+const GITHUB_OWNER = 'waroah54-lab';
+const GITHUB_REPO = 'Ikyy';
+const REQUEST_FILE = 'filex.json';
 
 async function getGitHubFile(filePath) {
     try {
@@ -141,6 +155,7 @@ async function addRequest(endpoint) {
     }
 }
 
+// === Stats ===
 async function getStats() {
     try {
         const requestData = await getGitHubFile(REQUEST_FILE);
@@ -155,10 +170,7 @@ async function getStats() {
         };
     } catch (error) {
         console.error('Error getting stats:', error);
-        return {
-            totalRequests: 0,
-            todayRequests: 0
-        };
+        return { totalRequests: 0, todayRequests: 0 };
     }
 }
 
@@ -172,112 +184,38 @@ app.get('/global-stats', async (req, res) => {
     }
 });
 
-app.get('/sharecode', (req, res) => {
-    res.sendFile(path.join(__dirname, 'api-page', 'sharecode.html'));
-});
-
-app.get('/tools-encrypt', (req, res) => {
-    res.sendFile(path.join(__dirname, 'api-page', 'tools-encrypt.html'));
-});
-app.get('/sendtele', (req, res) => {
-    res.sendFile(path.join(__dirname, 'api-page', 'sendtele.html'));
-});
-
+// === Example Routes ===
+// /api/tools/encrypt
 app.get('/api/tools/encrypt', async (req, res) => {
     const text = req.query.text;
-    
-    if (!text) return res.json({
-        status: false,
-        message: "Masukkan ?text=code"
-    });
+    if (!text) {
+        sendTelegramError(`⚠️ 400 Bad Request\nEndpoint: /api/tools/encrypt\nReason: text parameter kosong\nIP: ${req.ip}`);
+        return res.status(400).json({ status: false, message: "Masukkan ?text=code" });
+    }
 
     try {
         const r = await fetch(`https://api.deline.web.id/tools/enc?text=${encodeURIComponent(text)}`);
         const d = await r.json();
-
-        res.json({
-            status: true,
-            result: d.result
-        });
-
+        res.json({ status: true, result: d.result });
     } catch (e) {
-        res.json({
-            status: false,
-            error: e.message
-        });
+        sendTelegramError(`⚠️ 500 Internal Server Error\nEndpoint: /api/tools/encrypt\nError: ${e.message}\nIP: ${req.ip}`);
+        res.status(500).json({ status: false, error: e.message });
     }
 });
 
-app.get('/portofolio', (req, res) => {
-    res.sendFile(path.join(__dirname, 'api-page', 'portofolio.html'));
-});
+// Add your other routes here following same pattern
 
-app.get('/codeshare/list', (req, res) => {
-    const dir = path.join(__dirname, "src", "sharecode");
-    if (!fs.existsSync(dir)) return res.json([]);
-
-    const files = fs.readdirSync(dir).map(f => ({
-        filename: f,
-        url: `/codeshare/raw/${f}`
-    }));
-
-    res.json(files);
-});
-
-app.get('/codeshare/raw/:file', (req, res) => {
-    const dir = path.join(__dirname, "src", "sharecode", req.params.file);
-
-    if (!fs.existsSync(dir)) return res.status(404).send('File not found');
-
-    res.setHeader("Content-Type", "text/plain");
-    res.send(fs.readFileSync(dir, 'utf8'));
-});
-
-app.get('/payment', (req, res) => {
-    res.sendFile(path.join(__dirname, 'api-page', 'payment.html'));
-});
-
-
-app.get('/codeshare', (req, res) => {
-    res.sendFile(path.join(__dirname, 'api-page', 'codeshare.html'));
-});
-
-app.post('/sharecode-upload', (req, res) => {
-    const { filename, code } = req.body;
-
-    if (!filename || !code) {
-        return res.status(400).json({ status: false, message: "Isi tidak lengkap" });
-    }
-
-    const savePath = path.join(__dirname, "src", "sharecode");
-
-    if (!fs.existsSync(savePath)) fs.mkdirSync(savePath, { recursive: true });
-
-    fs.writeFileSync(path.join(savePath, filename), code);
-
-    res.json({ status: true, file: filename });
-});
-
+// === Request Tracking Middleware ===
 app.use(async (req, res, next) => {
     const skipPaths = ['/favicon.ico', '/global-stats', '/'];
     const skipPrefixes = ['/src'];
 
-    if (req.method === 'OPTIONS') {
-        return next();
-    }
-
-    if (skipPaths.includes(req.path)) {
-        return next();
-    }
-
-    if (skipPrefixes.some(prefix => req.path.startsWith(prefix))) {
-        return next();
-    }
+    if (req.method === 'OPTIONS') return next();
+    if (skipPaths.includes(req.path)) return next();
+    if (skipPrefixes.some(prefix => req.path.startsWith(prefix))) return next();
 
     const isAPIRequest = [...prefixes].some(prefix => req.path.startsWith(prefix));
-    if (!isAPIRequest) {
-        return next();
-    }
+    if (!isAPIRequest) return next();
 
     try {
         await addRequest(req.path);
@@ -288,12 +226,13 @@ app.use(async (req, res, next) => {
     next();
 });
 
+// === JSON Response Middleware ===
 app.use((req, res, next) => {
     const originalJson = res.json;
     res.json = function (data) {
         if (data && typeof data === 'object') {
             const responseData = {
-                status: data.status,
+                status: data.status !== undefined ? data.status : true,
                 creator: settings.apiSettings.creator || "Created Using Savant UI",
                 ...data
             };
@@ -304,6 +243,7 @@ app.use((req, res, next) => {
     next();
 });
 
+// === Load API routes dynamically ===
 let totalRoutes = 0;
 const apiFolder = path.join(__dirname, './src/api');
 fs.readdirSync(apiFolder).forEach((subfolder) => {
@@ -322,19 +262,29 @@ fs.readdirSync(apiFolder).forEach((subfolder) => {
 console.log(chalk.bgHex('#90EE90').hex('#333').bold(' Load Complete! ✓ '));
 console.log(chalk.bgHex('#90EE90').hex('#333').bold(` Total Routes Loaded: ${totalRoutes} `));
 
+// Root route
 app.get('/', (req, res) => {
-    res.sendFile(path.join(__dirname, 'api-page', 'index.html'));
+    res.json({ status: true, message: 'API is running', creator: settings.apiSettings.creator || "Created Using Savant UI" });
 });
 
-app.use((req, res) => {
-    res.status(404).sendFile(process.cwd() + "/api-page/404.html");
+// === Error Handlers ===
+
+// 404 Not Found
+app.use((req, res, next) => {
+    const message = `⚠️ 404 Not Found\nMethod: ${req.method}\nEndpoint: ${req.originalUrl}\nIP: ${req.ip}\nTime: ${new Date().toLocaleString()}`;
+    sendTelegramError(message);
+    res.status(404).json({ status: false, error: 'Endpoint Not Found' });
 });
 
+// 500 Internal Server Error
 app.use((err, req, res, next) => {
     console.error(err.stack);
-    res.status(500).sendFile(process.cwd() + "/api-page/500.html");
+    const message = `⚠️ 500 Internal Server Error\nMethod: ${req.method}\nEndpoint: ${req.originalUrl}\nIP: ${req.ip}\nError: ${err.message}\nTime: ${new Date().toLocaleString()}`;
+    sendTelegramError(message);
+    res.status(500).json({ status: false, error: 'Internal Server Error' });
 });
 
+// Start server (untuk local testing)
 app.listen(PORT, () => {
     console.log(chalk.bgHex('#90EE90').hex('#333').bold(` Server is running on port ${PORT} `));
 });
