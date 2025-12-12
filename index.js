@@ -14,7 +14,7 @@ const GITHUB_REPO = 'Ikyy';
 const REQUEST_FILE = 'filex.json';
 const telegramLogger = require('./telegramLogger');
 const TELEGRAM_BOT_TOKEN = '8594290972:AAEHwe3w4bsBxOyct1B_FXRxNDNBy-Y2yGI';
-const TELEGRAM_CHAT_ID = 'CHAT_ID_CHANNEL_KAMU';
+const TELEGRAM_CHAT_ID = '-1002966989270';
 
 telegramLogger(app, TELEGRAM_BOT_TOKEN, TELEGRAM_CHAT_ID);
 
