@@ -297,6 +297,11 @@
           "desc": "Cek Info Cuaca",
           "innerDesc": "Masukan city",
           "path": "/Info/cuaca?apikey=&query="
+        },
+        {
+          "name": "Info Events Ml",
+          "desc": "Info Ml",
+          "path": "/Info/ml"
         }
       ]
     },
