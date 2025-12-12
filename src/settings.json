@@ -158,6 +158,12 @@
           "path": "/canvas/bratv1?apikey=&text="
         },
         {
+  "name": "QuoteChat",
+  "desc": "Quote Generator",
+  "innerDesc": "Masukan teks name url",
+  "path": "/canvas/quotechat?apikey=&text=&name=&profile="
+        }
+        {
           "name": "Text2Image",
           "desc": "Text2Image Generator",
           "innerDesc": "Masukan nama font & teks",
