@@ -62,15 +62,8 @@ async function getGitHubFile(filePath) {
                 'User-Agent': 'Ikyy-RestApi'
             }
         });
-
-        if (response.status === 404) {
-            return { content: Buffer.from('[]').toString('base64'), sha: null };
-        }
-
-        if (!response.ok) {
-            throw new Error(`GitHub API error: ${response.status}`);
-        }
-
+        if (response.status === 404) return { content: Buffer.from('[]').toString('base64'), sha: null };
+        if (!response.ok) throw new Error(`GitHub API error: ${response.status}`);
         return await response.json();
     } catch (error) {
         console.error('Error getting GitHub file:', error);
@@ -110,10 +103,7 @@ async function updateGitHubFile(filePath, data) {
                 continue;
             }
 
-            if (!response.ok) {
-                throw new Error(`GitHub update error: ${response.status}`);
-            }
-
+            if (!response.ok) throw new Error(`GitHub update error: ${response.status}`);
             return true;
         } catch (error) {
             if (error.message.includes('409') && retryCount < maxRetries) {
@@ -125,7 +115,6 @@ async function updateGitHubFile(filePath, data) {
             throw error;
         }
     }
-
     throw new Error(`Failed to update ${filePath} after ${maxRetries} retries`);
 }
 
@@ -160,56 +149,32 @@ async function getStats() {
     try {
         const requestData = await getGitHubFile(REQUEST_FILE);
         const requests = JSON.parse(Buffer.from(requestData.content, 'base64').toString());
-
         const today = new Date().toLocaleDateString('id-ID');
         const todayRequests = requests.filter(req => req.date === today).length;
-
-        return {
-            totalRequests: requests.length,
-            todayRequests: todayRequests
-        };
+        return { totalRequests: requests.length, todayRequests };
     } catch (error) {
         console.error('Error getting stats:', error);
         return { totalRequests: 0, todayRequests: 0 };
     }
 }
 
-app.get('/global-stats', async (req, res) => {
-    try {
-        const stats = await getStats();
-        res.json(stats);
-    } catch (error) {
-        console.error('Error fetching stats:', error);
-        res.status(500).json({ error: 'Failed to fetch stats' });
-    }
-});
+// === Async wrapper for all routes ===
+function asyncHandler(fn) {
+    return async (req, res, next) => {
+        try {
+            await fn(req, res, next);
+        } catch (err) {
+            const message = `⚠️ 500 Internal Server Error\nMethod: ${req.method}\nEndpoint: ${req.originalUrl}\nIP: ${req.ip}\nError: ${err.message}\nTime: ${new Date().toLocaleString()}`;
+            sendTelegramError(message);
+            res.status(500).json({ status: false, error: 'Internal Server Error' });
+        }
+    };
+}
 
-// === Example Routes ===
-// /api/tools/encrypt
-app.get('/api/tools/encrypt', async (req, res) => {
-    const text = req.query.text;
-    if (!text) {
-        sendTelegramError(`⚠️ 400 Bad Request\nEndpoint: /api/tools/encrypt\nReason: text parameter kosong\nIP: ${req.ip}`);
-        return res.status(400).json({ status: false, message: "Masukkan ?text=code" });
-    }
-
-    try {
-        const r = await fetch(`https://api.deline.web.id/tools/enc?text=${encodeURIComponent(text)}`);
-        const d = await r.json();
-        res.json({ status: true, result: d.result });
-    } catch (e) {
-        sendTelegramError(`⚠️ 500 Internal Server Error\nEndpoint: /api/tools/encrypt\nError: ${e.message}\nIP: ${req.ip}`);
-        res.status(500).json({ status: false, error: e.message });
-    }
-});
-
-// Add your other routes here following same pattern
-
-// === Request Tracking Middleware ===
+// === Global Request Tracking ===
 app.use(async (req, res, next) => {
     const skipPaths = ['/favicon.ico', '/global-stats', '/'];
     const skipPrefixes = ['/src'];
-
     if (req.method === 'OPTIONS') return next();
     if (skipPaths.includes(req.path)) return next();
     if (skipPrefixes.some(prefix => req.path.startsWith(prefix))) return next();
@@ -217,12 +182,7 @@ app.use(async (req, res, next) => {
     const isAPIRequest = [...prefixes].some(prefix => req.path.startsWith(prefix));
     if (!isAPIRequest) return next();
 
-    try {
-        await addRequest(req.path);
-    } catch (error) {
-        console.error('Error tracking:', error);
-    }
-
+    try { await addRequest(req.path); } catch (error) { console.error('Error tracking:', error); }
     next();
 });
 
@@ -231,11 +191,20 @@ app.use((req, res, next) => {
     const originalJson = res.json;
     res.json = function (data) {
         if (data && typeof data === 'object') {
+            const status = data.status !== undefined ? data.status : true;
             const responseData = {
-                status: data.status !== undefined ? data.status : true,
+                status: status,
                 creator: settings.apiSettings.creator || "Created Using Savant UI",
                 ...data
             };
+
+            // HTTP status
+            if (status === true) {
+                res.status(200);
+            } else if (!res.statusCode || res.statusCode === 200) {
+                res.status(400);
+            }
+
             return originalJson.call(this, responseData);
         }
         return originalJson.call(this, data);
@@ -243,40 +212,39 @@ app.use((req, res, next) => {
     next();
 });
 
-// === Load API routes dynamically ===
+// === Load all routes dynamically with asyncHandler ===
 let totalRoutes = 0;
 const apiFolder = path.join(__dirname, './src/api');
-fs.readdirSync(apiFolder).forEach((subfolder) => {
+fs.readdirSync(apiFolder).forEach(subfolder => {
     const subfolderPath = path.join(apiFolder, subfolder);
     if (fs.statSync(subfolderPath).isDirectory()) {
-        fs.readdirSync(subfolderPath).forEach((file) => {
-            const filePath = path.join(subfolderPath, file);
+        fs.readdirSync(subfolderPath).forEach(file => {
             if (path.extname(file) === '.js') {
-                require(filePath)(app);
+                const routeModule = require(path.join(subfolderPath, file));
+                if (typeof routeModule === 'function') {
+                    routeModule(app, asyncHandler); // kirim app + asyncHandler
+                }
                 totalRoutes++;
-                console.log(chalk.bgHex('#FFFF99').hex('#333').bold(` Loaded Route: ${path.basename(file)} `));
+                console.log(chalk.bgHex('#FFFF99').hex('#333').bold(` Loaded Route: ${file} `));
             }
         });
     }
 });
-console.log(chalk.bgHex('#90EE90').hex('#333').bold(' Load Complete! ✓ '));
-console.log(chalk.bgHex('#90EE90').hex('#333').bold(` Total Routes Loaded: ${totalRoutes} `));
+console.log(chalk.bgHex('#90EE90').hex('#333').bold(`Total Routes Loaded: ${totalRoutes}`));
 
 // Root route
 app.get('/', (req, res) => {
     res.json({ status: true, message: 'API is running', creator: settings.apiSettings.creator || "Created Using Savant UI" });
 });
 
-// === Error Handlers ===
-
-// 404 Not Found
+// === 404 Handler ===
 app.use((req, res, next) => {
     const message = `⚠️ 404 Not Found\nMethod: ${req.method}\nEndpoint: ${req.originalUrl}\nIP: ${req.ip}\nTime: ${new Date().toLocaleString()}`;
     sendTelegramError(message);
     res.status(404).json({ status: false, error: 'Endpoint Not Found' });
 });
 
-// 500 Internal Server Error
+// === 500 Handler ===
 app.use((err, req, res, next) => {
     console.error(err.stack);
     const message = `⚠️ 500 Internal Server Error\nMethod: ${req.method}\nEndpoint: ${req.originalUrl}\nIP: ${req.ip}\nError: ${err.message}\nTime: ${new Date().toLocaleString()}`;
@@ -284,9 +252,9 @@ app.use((err, req, res, next) => {
     res.status(500).json({ status: false, error: 'Internal Server Error' });
 });
 
-// Start server (untuk local testing)
+// Start server
 app.listen(PORT, () => {
-    console.log(chalk.bgHex('#90EE90').hex('#333').bold(` Server is running on port ${PORT} `));
+    console.log(chalk.bgHex('#90EE90').hex('#333').bold(`Server is running on port ${PORT}`));
 });
 
 module.exports = app;
