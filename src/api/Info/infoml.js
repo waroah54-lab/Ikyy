@@ -20,7 +20,6 @@ module.exports = function(app) {
 
             res.json({
                 success: true,
-                source: "Ikyy",
                 events: transformed
             });
         } catch (error) {
