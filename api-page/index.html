@@ -16,6 +16,13 @@ body {
     background: #f2f5ff;
     font-family: 'Inter', sans-serif;
     color: #23335a;
+    transition: .3s ease;
+}
+
+.dark body,
+body.dark {
+    background: #0f1117;
+    color: #d0d5f7;
 }
 
 /* NAVBAR */
@@ -24,9 +31,29 @@ body {
     backdrop-filter: blur(10px);
     box-shadow: 0 4px 20px rgba(0,0,0,0.07);
 }
+body.dark .navbar {
+    background: #1b1e27dd;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+}
 .navbar-brand {
     font-weight: 700;
     color: #415aff !important;
+}
+body.dark .navbar-brand {
+    color: #8ea2ff !important;
+}
+
+/* THEME TOGGLE BUTTON */
+#themeToggle {
+    cursor: pointer;
+    font-size: 20px;
+    padding: 6px 12px;
+    border-radius: 10px;
+    background: #e8e9ff;
+}
+body.dark #themeToggle {
+    background: #2b2f3d;
+    color: #c7d0ff;
 }
 
 /* BANNER */
@@ -34,6 +61,9 @@ body {
     width: 100%;
     border-radius: 18px;
     box-shadow: 0 10px 30px rgba(0,0,0,0.12);
+}
+body.dark .banner {
+    box-shadow: 0 10px 30px rgba(0,0,0,0.4);
 }
 
 /* TITLE */
@@ -47,12 +77,6 @@ body {
 }
 
 /* STATS */
-.stats-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(170px, 1fr));
-    gap: 20px;
-    margin-top: 25px;
-}
 .stat-item {
     padding: 22px;
     background: white;
@@ -61,14 +85,18 @@ body {
     box-shadow: 0 6px 18px rgba(0,0,0,0.05);
     transition: .2s;
 }
-.stat-item:hover {
-    transform: translateY(-4px);
-    box-shadow: 0 12px 26px rgba(0,0,0,0.1);
+body.dark .stat-item {
+    background: #1c1f29;
+    border-color: #2e3344;
+    box-shadow: 0 6px 18px rgba(0,0,0,0.2);
 }
 .stat-number {
     font-size: 30px;
     font-weight: 700;
     color: #3f57ff;
+}
+body.dark .stat-number {
+    color: #8ea2ff;
 }
 
 /* SEARCH */
@@ -79,6 +107,11 @@ body {
     background: #ffffffcc;
     backdrop-filter: blur(6px);
     box-shadow: 0 4px 12px rgba(0,0,0,0.07);
+}
+body.dark #searchInput {
+    background: #1c1f29cc;
+    border-color: #2b3144;
+    color: white;
 }
 
 /* API LIST */
@@ -91,23 +124,34 @@ body {
     margin-bottom: 18px;
     transition: .2s;
 }
+body.dark .api-item {
+    background: #1c1f29ee;
+    border-color: #2c3144;
+    box-shadow: 0 6px 16px rgba(0,0,0,0.3);
+}
 .api-item:hover {
     background: #f3f6ff;
     transform: translateY(-3px);
     border-color: #7484ff;
+}
+body.dark .api-item:hover {
+    background: #272c3b;
+    border-color: #8ea2ff;
 }
 .api-name {
     font-size: 18px;
     font-weight: 600;
     color: #3d4fff;
 }
+body.dark .api-name {
+    color: #8ea2ff;
+}
 .api-desc {
     font-size: 14px;
     color: #4b5dbb;
 }
-.api-innerdesc {
-    font-size: 12px;
-    color: #6b75a5;
+body.dark .api-desc {
+    color: #b6c1ff;
 }
 
 /* MODAL */
@@ -118,17 +162,25 @@ body {
     backdrop-filter: blur(14px);
     box-shadow: 0 10px 32px rgba(0,0,0,0.15);
 }
+body.dark .modal-content {
+    background: #1c1f29ee;
+    border-color: #2c3144;
+}
 pre {
     background: #eef1ff;
     padding: 14px;
     border-radius: 10px;
     border: 1px solid #d0d7ff;
 }
-
+body.dark pre {
+    background: #282c3d;
+    border-color: #333a55;
+    color: #cfd5ff;
+}
 </style>
 </head>
 
-<body>
+<body class="light">
 
 <!-- NAVBAR -->
 <nav class="navbar navbar-expand-lg">
@@ -137,6 +189,8 @@ pre {
         <span id="header"></span>
         <span id="versionHeader" class="ms-1"></span>
     </a>
+
+    <div id="themeToggle" class="ms-3">🌙</div>
 
     <button class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#navbarNav">
         <span class="navbar-toggler-icon"></span>
@@ -155,17 +209,11 @@ pre {
 </div>
 </nav>
 
-<!-- CONTENT WRAPPER -->
 <div class="container mt-4">
-
-    <!-- BANNER -->
     <img id="dynamicImage" class="banner mb-4" src="">
-
-    <!-- TITLE -->
     <h1 id="name"></h1>
     <p id="description" class="lead"></p>
 
-    <!-- STATS -->
     <div class="stats-grid my-4">
         <div class="stat-item">
             <div class="stat-number" id="totalEndpoints">0</div>
@@ -185,19 +233,14 @@ pre {
         </div>
     </div>
 
-    <!-- SEARCH -->
     <input id="searchInput" class="form-control mb-4" placeholder="Search API...">
-
-    <!-- API CONTENT -->
     <div id="apiContent"></div>
-
 </div>
 
 <!-- MODAL -->
 <div class="modal fade" id="apiResponseModal">
     <div class="modal-dialog modal-dialog-centered modal-lg">
         <div class="modal-content">
-
             <div class="modal-header">
                 <div>
                     <h5 class="modal-title" id="apiResponseModalLabel"></h5>
@@ -207,15 +250,11 @@ pre {
             </div>
 
             <div class="modal-body">
-                
                 <pre id="apiEndpoint"></pre>
-
                 <div id="apiQueryInputContainer"></div>
-
                 <div id="apiResponseLoading" class="d-none text-center py-4">
                     <div class="spinner-border"></div>
                 </div>
-
                 <pre id="apiResponseContent" class="d-none mt-3"></pre>
             </div>
 
@@ -227,12 +266,13 @@ pre {
     </div>
 </div>
 
-<!-- MUSIC (AUTO + CLICK UNLOCK) -->
+<!-- MUSIC -->
 <audio id="bgMusic" autoplay loop>
     <source src="/src/tiktokio.com1765510687_i5fHLr2BVQba3Dnw9KmZ..mp3" type="audio/mpeg">
 </audio>
 
 <script>
+// AUDIO WORKAROUND
 document.addEventListener("DOMContentLoaded", () => {
     const audio = document.getElementById("bgMusic");
     audio.volume = 0.4;
@@ -246,13 +286,29 @@ document.addEventListener("DOMContentLoaded", () => {
     window.addEventListener("click", unlock);
     window.addEventListener("touchstart", unlock);
 });
+
+// THEME SYSTEM
+const body = document.body;
+const toggleBtn = document.getElementById("themeToggle");
+
+// Load saved theme
+if (localStorage.getItem("theme") === "dark") {
+    body.classList.add("dark");
+    toggleBtn.textContent = "☀️";
+}
+
+toggleBtn.onclick = () => {
+    body.classList.toggle("dark");
+    const dark = body.classList.contains("dark");
+
+    toggleBtn.textContent = dark ? "☀️" : "🌙";
+    localStorage.setItem("theme", dark ? "dark" : "light");
+};
 </script>
 
-<!-- SCRIPTS -->
+<!-- JS -->
 <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-
-<!-- CUSTOM DATA LOADER -->
 <script src="/script.js"></script>
 
 </body>
