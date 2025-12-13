@@ -53,6 +53,11 @@
       "name": "Seedream Generator",
       "desc": "",
       "path": "/edit/seedream?prompt=&image="
+    },
+    {
+      "name": "Nano Banana",
+      "desc": "",
+      "path": "/edit/nanobanana?prompt=&image="
     }
   ]
     },
