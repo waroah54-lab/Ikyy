@@ -11,7 +11,7 @@ const PORT = process.env.SERVER_PORT || 3000;
 
 // === Telegram Config ===
 const TELEGRAM_BOT_TOKEN = '8594290972:AAEHwe3w4bsBxOyct1B_FXRxNDNBy-Y2yGI';
-const TELEGRAM_CHAT_ID = '-1002966989270';
+const TELEGRAM_CHAT_ID = '';
 
 async function sendTelegramError(text) {
     try {
