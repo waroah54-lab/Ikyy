@@ -228,6 +228,16 @@
   ]
     },
     {
+  "name": "Uploader",
+  "items": [
+    {
+      "name": "upload videy",
+      "desc": "",
+      "path": "/upload/videyurl?url="
+    }
+  ]
+    },
+    {
       "name": "Search",
       "items": [
         {
