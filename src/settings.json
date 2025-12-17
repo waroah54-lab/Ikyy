@@ -108,6 +108,12 @@
           "path": "/download/aio?url="
         },
         {
+          "name": "Twitter",
+          "desc": "Twitter downloader",
+          "innerDesc": "Masukan url",
+          "path": "/download/twitter?apikey=&url="
+        },
+        {
           "name": "Spotify",
           "desc": "Spotify downloader",
           "innerDesc": "Masukan url",
