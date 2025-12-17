@@ -111,7 +111,7 @@
           "name": "Twitter",
           "desc": "Twitter downloader",
           "innerDesc": "Masukan url",
-          "path": "/download/twitter?apikey=&url="
+          "path": "/download/twitterdl?apikey=&url="
         },
         {
           "name": "Spotify",
