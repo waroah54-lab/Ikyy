@@ -1,4 +1,3 @@
-```javascript
 const axios = require('axios');
 
 module.exports = function (app) {
@@ -48,4 +47,3 @@ module.exports = function (app) {
         }
     });
 };
-```
