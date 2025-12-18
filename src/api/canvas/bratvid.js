@@ -1,5 +1,3 @@
-const axios = require('axios');
-
 module.exports = function (app) {
     app.get('/canvas/bratvid', async (req, res) => {
         const { apikey, text } = req.query;
@@ -20,19 +18,36 @@ module.exports = function (app) {
         });
 
         try {
-            const { data, headers } = await axios.get(`https://brat.siputzx.my.id/mp4?text=${encodeURIComponent(text)}`, {
-                responseType: 'arraybuffer'
-            });
+            const response = await fetch(`https://brat.siputzx.my.id/mp4?text=${encodeURIComponent(text)}`);
             
-            const contentType = headers['content-type'] || 'video/mp4';
+            if (!response.ok) {
+                throw new Error(`HTTP ${response.status}`);
+            }
             
+            // Get content type from response
+            const contentType = response.headers.get('content-type') || 'video/mp4';
+            const contentLength = response.headers.get('content-length');
+            
+            // Set headers
             res.writeHead(200, {
                 'Content-Type': contentType,
-                'Content-Length': data.length,
-                'Cache-Control': 'public, max-age=86400'
+                'Content-Length': contentLength,
+                'Cache-Control': 'public, max-age=86400',
+                'Accept-Ranges': 'bytes',
+                'Content-Disposition': 'inline; filename="bratvid.mp4"'
             });
             
-            res.end(data);
+            // Stream the response body
+            const reader = response.body.getReader();
+            
+            while (true) {
+                const { done, value } = await reader.read();
+                if (done) break;
+                res.write(value);
+            }
+            
+            res.end();
+            
         } catch (error) {
             console.error('Bratvid API Error:', error.message);
             res.status(500).json({ 
