@@ -1,7 +1,7 @@
 const axios = require('axios');
 
 module.exports = function (app) {
-    app.get('/api/canvas/iphone-quoted', async (req, res) => {
+    app.get('/canvas/iphone-quoted', async (req, res) => {
         const { apikey, messageText } = req.query;
         
         if (!apikey) return res.status(400).json({
