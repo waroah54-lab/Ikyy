@@ -179,10 +179,28 @@
           "path": "/canvas/bratv1?apikey=&text="
         },
         {
+          "name": "Brat video",
+          "desc": "Brat Generator Gif",
+          "innerDesc": "Masukan teks",
+          "path": "/canvas/bratvid?apikey=&text="
+        },
+        {
   "name": "QuoteChat",
   "desc": "Quote Generator",
   "innerDesc": "Masukan teks name url",
   "path": "/canvas/quotechat?apikey=&text=&name=&profile="
+        },
+        {
+  "name": "QuoteChat Iphone",
+  "desc": "Quote Generator Iphone",
+  "innerDesc": "Masukan teks",
+  "path": "/canvas/iphone-quoted?apikey=&messageText="
+        },
+        {
+  "name": "Nulis Text",
+  "desc": "Nulis Kertas",
+  "innerDesc": "Masukan teks",
+  "path": "/canvas/nulis?apikey=&text="
         },
         {
           "name": "Text2Image",
