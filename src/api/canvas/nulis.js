@@ -1,7 +1,7 @@
 const axios = require('axios');
 
 module.exports = function (app) {
-    app.get('/api/canvas/nulis', async (req, res) => {
+    app.get('/canvas/nulis', async (req, res) => {
         const { apikey, text } = req.query;
         
         if (!apikey) return res.status(400).json({
